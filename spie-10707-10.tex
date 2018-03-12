@@ -1,0 +1,117 @@
+\documentclass[]{spie}  %>>> use for US letter paper
+%\documentclass[a4paper]{spie}  %>>> use this instead for A4 paper
+%\documentclass[nocompress]{spie}  %>>> to avoid compression of citations
+
+\renewcommand{\baselinestretch}{1.0} % Change to 1.65 for double spacing
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{LSST Data Management Software Development Practices and Tools}
+
+\author[a]{Tim~Jenness}
+\author[a]{Frossie~Economou}
+\author[a]{William~O'Mullane}
+\author[b]{Kian-Tat~Lim}
+\author[c]{John~Swinbank}
+\author[a]{Josh~Hoblitt}
+\author[a]{Jonathan~Sick}
+\author[a]{Adam~Thornton}
+\author[d]{Fabio~Hernandez}
+\author[c]{Krzysztof~Findeisen}
+\affil[a]{LSST Project Office, 950 N.\ Cherry Avenue, Tucson, AZ 85719, USA}
+\affil[b]{SLAC National Accelerator Laboratory, 2575 Sand Hill Rd, Menlo Park, CA 94025, USA}
+\affil[c]{University of Washington, Dept. of Astronomy, Box 351580, Seattle, WA 98195, USA}
+\affil[d]{Centre de Calcul de l'IN2P3, USR 6402 du CNRS/IN2P3, 43 Bd. du 11 Novembre 1918, 69622 Villeurbanne Cedex, France}
+
+\authorinfo{Further author information: (Send correspondence to T.J.)\\T.J.: E-mail: tjenness@lsst.org,\\  W.O'M: E-mail: womullan@lsst.org}
+
+% Option to view page numbers
+\pagestyle{empty} % change to \pagestyle{plain} for page numbers
+\setcounter{page}{1} % Set start page numbering at e.g. 301
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The Large Synoptic Survey Telescope is an 8.4m optical survey telescope being constructed on Cerro Pachon in Chile.
+The data management system being developed must be able to process the nightly alert data, 20,000 expected transient alerts per minute, in near real time, and construct annual data releases at the petabyte scale.
+The development team consists of more than 70 people working in six different sites across the US developing an integrated set of software to meet the LSST requirements.
+In this paper we discuss our agile software development methodology and our API and developer decision making process.
+We also discuss the software tools that we use for continuous integration and deployment.
+\end{abstract}
+
+% Include a list of keywords after the abstract
+\keywords{}
+
+\section{INTRODUCTION}
+
+\cite{2015arXiv151207914J}
+
+\section{AGILE DEVELOPMENT}
+
+Epics, stories, P6, milestones, EVMS.
+
+How has this evolved since Kantor et al SPIE 2016\cite{2016SPIE.9911E..0NK}?
+
+\section{SOFTWARE DEVELOPMENT}
+
+Use of feature branches associated with Jira stories.
+Rebase before merging.
+Branch protection.
+
+Software quality?
+Unit tests with pytest.
+Flake8 clean.
+Clang-format.
+Code coverage (we should enable it)
+
+EUPS.
+
+\section{COMMUNICATION}
+
+Slack and community.
+
+Sqrbot?
+
+\section{DOCUMENTATION}
+
+Developer guide.
+Tech notes vs controlled documents.
+Latex vs RST.
+Use of confluence.
+
+LSST the Docs.
+pipelines.lsst.io?
+
+numpydoc vs doxygen. breathe and sphinx.
+
+\section{DECISION MAKING PROCESS}
+
+aka RFCs.
+DM-CCB.
+
+\section{CONTINUOUS INTEGRATION}
+
+Jenkins.
+
+\section{CONTINUOUS DEPLOYMENT}
+
+LSST the docs (duplicate?).
+
+Weekly builds as eups binaries.
+
+Small mention of JupyterLab linking to main SPIE paper where we mention automatically deploying weeklies to the JupyterLab system.
+
+
+\acknowledgments % equivalent to \section*{ACKNOWLEDGMENTS}
+
+This material is based upon work supported in part by the National Science Foundation through Cooperative Agreement 1258333 managed by the Association of Universities for Research in Astronomy (AURA), and the Department of Energy under Contract No.\ DE-AC02-76SF00515 with the SLAC National Accelerator Laboratory.
+Additional LSST funding comes from private donations, grants to universities, and in-kind support from LSSTC Institutional Members.
+
+% References
+\bibliography{spie-10707-10} % bibliography data
+\bibliographystyle{spiebib} % makes bibtex use spiebib.bst
+
+\end{document}
