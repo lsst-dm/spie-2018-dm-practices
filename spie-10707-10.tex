@@ -12,18 +12,22 @@
 
 \author[a]{Tim~Jenness}
 \author[a]{Frossie~Economou}
-\author[a]{William~O'Mullane}
-\author[b]{Kian-Tat~Lim}
-\author[c]{John~Swinbank}
+\author[b]{Krzysztof~Findeisen}
+\author[c]{Fabio~Hernandez}
 \author[a]{Josh~Hoblitt}
+\author[d]{Kian-Tat~Lim}
+\author[d]{Fritz~Mueller}
+\author[a]{William~O'Mullane}
+\author[b]{Russell~Owen}
+\author[e]{Pim~Schellart}
 \author[a]{Jonathan~Sick}
 \author[a]{Adam~Thornton}
-\author[d]{Fabio~Hernandez}
-\author[c]{Krzysztof~Findeisen}
+
 \affil[a]{LSST Project Office, 950 N.\ Cherry Avenue, Tucson, AZ 85719, USA}
-\affil[b]{SLAC National Accelerator Laboratory, 2575 Sand Hill Rd, Menlo Park, CA 94025, USA}
-\affil[c]{University of Washington, Dept. of Astronomy, Box 351580, Seattle, WA 98195, USA}
-\affil[d]{Centre de Calcul de l'IN2P3, USR 6402 du CNRS/IN2P3, 43 Bd. du 11 Novembre 1918, 69622 Villeurbanne Cedex, France}
+\affil[b]{University of Washington, Dept. of Astronomy, Box 351580, Seattle, WA 98195, USA}
+\affil[c]{Centre de Calcul de l'IN2P3, USR 6402 du CNRS/IN2P3, 43 Bd. du 11 Novembre 1918, 69622 Villeurbanne Cedex, France}
+\affil[d]{SLAC National Accelerator Laboratory, 2575 Sand Hill Rd, Menlo Park, CA 94025, USA}
+\affil[e]{Department of Astrophysical Sciences, Princeton University, Princeton, NJ 08544}
 
 \authorinfo{Further author information: (Send correspondence to T.J.)\\T.J.: E-mail: tjenness@lsst.org,\\  W.O'M: E-mail: womullan@lsst.org}
 
@@ -45,65 +49,17 @@ We also discuss the software tools that we use for continuous integration and de
 % Include a list of keywords after the abstract
 \keywords{}
 
-\section{INTRODUCTION}
 
-\cite{2015arXiv151207914J}
-
-\section{AGILE DEVELOPMENT}
-
-Epics, stories, P6, milestones, EVMS.
-
-How has this evolved since Kantor et al SPIE 2016\cite{2016SPIE.9911E..0NK}?
-
-\section{SOFTWARE DEVELOPMENT}
-
-Use of feature branches associated with Jira stories.
-Rebase before merging.
-Branch protection.
-
-Software quality?
-Unit tests with pytest.
-Flake8 clean.
-Clang-format.
-Code coverage (we should enable it)
-
-EUPS.
-
-\section{COMMUNICATION}
-
-Slack and community.
-
-Sqrbot?
-
-\section{DOCUMENTATION}
-
-Developer guide.
-Tech notes vs controlled documents.
-Latex vs RST.
-Use of confluence.
-
-LSST the Docs.
-pipelines.lsst.io?
-
-numpydoc vs doxygen. breathe and sphinx.
-
-\section{DECISION MAKING PROCESS}
-
-aka RFCs.
-DM-CCB.
-
-\section{CONTINUOUS INTEGRATION}
-
-Jenkins.
-
-\section{CONTINUOUS DEPLOYMENT}
-
-LSST the docs (duplicate?).
-
-Weekly builds as eups binaries.
-
-Small mention of JupyterLab linking to main SPIE paper where we mention automatically deploying weeklies to the JupyterLab system.
-
+\input{intro}
+\input{agile}
+\input{mbse}
+\input{software}
+\input{comms}
+\input{docs}
+\input{rfc}
+\input{ci}
+\input{cd}
+\input{conclusion}
 
 \acknowledgments % equivalent to \section*{ACKNOWLEDGMENTS}
 
