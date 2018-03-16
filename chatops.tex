@@ -1,3 +1,19 @@
 \subsubsection{Chat Ops}
 
-sqrbot.
+DM-SQuaRE is using a Slack chatbot called ``sqrbot'' to make some tasks
+easier. Currently it performs a range of functions, from returning the
+status of various infrastructure machines to creating technotes to
+monitoring whether metrics in our processing stack have changed between
+CI builds. What these tasks have in common is that they were frequently
+requested actions that required someone being asked for help and having
+to interrupt their own work to perform a task. With sqrbot, the
+requestor can simply ask sqrbot in a Slack channel for the information
+(or creation of a technote skeleton, etc.) and get immediate gratification.
+
+The basic architecture is simple: sqrbot is simply a collection of hubot
+scripts running as a Slack bot, which in turn drive microservices,
+written in Python and implemented using the Flask framework.  These
+microservices have an API that responds with JSON, so the job of sqrbot
+is simply to accept commands, create appropriate HTTP transactions, and
+then reformat the output into a conversational format.  The whole
+assembly runs in a Kubernetes cluster.
