@@ -1,5 +1,20 @@
 \subsection{Case Study: Deploying releases to JupyterLab}
 
+The LSST Stack is already built within the context of a CI framework
+that produces nightly and weekly builds.  One of the build artifacts of
+this process is a Docker container that includes the stack.  Since the
+JupyterLab environment is simply Kubernetes, we have appended a phase to
+the stack builds that starts with the Docker stack container and adds
+the JupyterLab server and other Python modules we need, as well as the
+user provisioning machinery and Lab startup scripts.  Thus, with each
+nightly build of the stack, we also get a nightly build of the
+JupyterLab environment wrapping that version of the stack.  In
+JupyterHub, we have configuration directives that scan a Docker
+repository looking for an image with tags in a particular format or set
+of formats.  From this we can construct a menu of the most recent daily,
+weekly, and release builds, and present a choice of stack versions to
+the user at JupyterHub login time.
+
 As our exploration of JupyterLab as the interactive notebook component
 of the LSST Science Platform proceeds, we have realized the need for
 automated deployments of the lab environment, which is simply a
@@ -11,16 +26,14 @@ a tutorial session or a conference extremely easy.  Our initial version
 of the automated deployment tool relies on Google Compute Engine as the
 back end, AWS Route 53 as the DNS provider, and either Github or CILogon
 as the OAuth2 provider.  We will add more options as demand warrants.
-The deployment tool basically provides a sequencer around gcloud,
-kubectl, and awscli.  It is driven from a YAML file, from environment
-variables, or from the command line.  The way the current version works
-is to substitute templated values from its configuration, and then run
-gcloud and kubectl to create the various components of the lab
-installation.  Future improvements may include a move to Helm charts
-rather than raw kubernetes YAML, a rewrite so that deployment becomes a
-Terraform configuration rather than a python module, and/or integration
-of TLS certificate management into the tool.
-
-
+The deployment tool provides a sequencer around gcloud, kubectl, and
+awscli.  It is driven from a YAML file, from environment variables, or
+from the command line.  The way the current version works is to
+substitute templated values from its configuration, and then run gcloud
+and kubectl to create the various components of the lab installation.
+Future improvements may include a move to Helm charts rather than raw
+kubernetes YAML, a rewrite so that deployment becomes a Terraform
+configuration rather than a python module, and/or integration of TLS
+certificate management into the tool.
 
 Link to main JupyterLab paper by Frossie et al.
