@@ -1,5 +1,12 @@
 \subsection{Development Model}
 
+
+The main focus of DM development is on the science pipelines packages\cite{2018PASJ...70S...5B} and the related support infrastructure, and the data access services and Qserv\cite{2011Wang:2011:QDS:2063348.2063364}.
+The standardized EUPS-based build system currently knows how to build more than 230 packages, which includes packages supported by the simulations team\cite{2014SPIE.9150E..14C} and packages of external dependencies, and each of those packages has its own git repository on GitHub\footnote{\url{https://github.com/lsst}}.
+
+For each of those DM git repositories we use a standard development methodology where the \texttt{master} branch is always releasable, in the sense that all unit tests pass and basic integration tests pass.
+All work is done on feature branches that have the name \texttt{tickets/DM-nnnn} where \texttt{DM-nnnn} matches the corresponding Jira story or bug associated with the work.
+
 Lots of small repositories.
 
 Feature branches associated with Jira tickets.
