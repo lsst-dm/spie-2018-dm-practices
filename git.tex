@@ -9,7 +9,10 @@ To enable concurrent development across all six LSST sites, the LSST development
 
 \subsubsection{Code Organization}\label{sec:git_repositories}
 
-Lots of small repositories.
+The data management system is divided into several hundred individual Git repositories, hosted on GitHub\footnote{\url{http://github.com/lsst/}}.
+Each repository corresponds to one code package, and all but a handful of repositories usually have at most one developer working on them at a time.
+Isolating code in small repositories minimizes the need for developers to frequently download code updates, something the Git framework requires whenever developers make concurrent changes to the \texttt{master} branch of the same repository.
+Representing each package by an independent repository also makes it easy to formalize and track inter-package dependencies using tools like EUPS (\autoref{sec:eups}).
 
 \subsubsection{The LSST Workflow}\label{sec:dev_workflow}
 
