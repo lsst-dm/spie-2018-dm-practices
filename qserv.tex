@@ -1,3 +1,9 @@
 \subsection{Case Study: Deploying Qserv}
 
 Docker etc.
+
+Distributed service application; multiple flavors of containers for various parts of the service are built by
+CI.
+TravisCI uses containers to run multi-node integration test suite on each branch commit and PR.
+Container deployment to bare-metal clusters is currently done with ad-hoc scripting, but we are moving to k8s.
+Discussion of some development and testing leverage we are looking to get from k8s.
