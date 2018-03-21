@@ -16,10 +16,26 @@ Representing each package by an independent repository also makes it easy to for
 
 \subsubsection{The LSST Workflow}\label{sec:dev_workflow}
 
-Feature branches associated with Jira tickets.
+LSST software development is based on the shared repository model: work is done on branches of a single repository rather than on user forks.
+Development work is associated with a Jira ticket (\autoref{sec:jira_ticket}), and keeping all work in a shared repository makes it easier to link code changes to their corresponding Jira tickets.
+This in turn makes it easier to audit work in terms of Jira tickets.
 
-Branch protection.
+All work associated with a specific Jira ticket is done on a feature branch named after that ticket.
+Developers must test their branch as part of the full data management system (\autoref{sec:jenkins}) before the code is considered ready to review or merge.
+GitHub pull requests from the ticket branch to \texttt{master} are used for code review, but not to merge the code.
+Instead, feature branches are merged by first rebasing them onto the latest version of \texttt{master}, then forcing a merge without Git's fast-forward optimization.
+This creates an empty merge commit that serves as a marker to distinguish which commits on \texttt{master} came from which feature branch.
+Rebasing ensures the Git commit history appears linear to later inspection, and that all ticketed work is present on the corresponding branch.
+If we did not rebase before merging, merge commits could include significant cleanup work that would be difficult to resolve into their original tickets.
 
-Rebase before merging.
+The LSST workflow has changed in two significant ways since it was first introduced.
+Originally, developers were allowed to commit fixes to Python docstrings and C++ documentation comments directly to \texttt{master}, without the need to create a ticket branch.
+However, as we expanded our tests to enforce coding style guidelines (\autoref{sec:flake8}), documentation edits began triggering build failures.
+In the current workflow all changes to code files, including documentation-only changes, must be made on branches and go through the review and testing process.
+
+In addition, the workflow was at first enforced by individual developers and their reviewers.
+While it worked well most of the time, there were occasional cases where a developer would accidentally push commits directly to \texttt{master}, merge improperly, or rebase onto an out-of-date \texttt{master}.
+Therefore, we began using GitHub's branch protection feature to block both direct commits to \texttt{master} and merges of unrebased ticket branches.
+Branch protection is transparent to developers so long as they follow the workflow, so this improvement catches errors without altering the overall development process.
 
 \input{other-workflows}
