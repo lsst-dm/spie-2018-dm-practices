@@ -1,3 +1,12 @@
-\subsubsection{Comparison with other workflows}
+\subsubsection{Comparison With Other Workflows}\label{sec:other_git_workflows}
 
-git flow.
+The LSST workflow is very similar to GitHub Flow \cite{GitHubFlow}, differing primarily in how merging is handled.
+GitHub Flow does not include a rebasing step because it does not require the commit history to be linearizable.
+Instead, in GitHub Flow, pull requests are considered the primary record of a repository's history.
+While the LSST workflow preserves both pull requests and feature branches, the primary source of a repository's history is the Jira tickets and the commits themselves.
+
+The LSST workflow does not have the separate integration and release branches characteristic of the other major Git workflow, Gitflow \cite{Gitflow}.
+Because package development is not tied directly to the release schedule, most developers do not need to use or be aware of release branches.
+The data management system's semiannual software releases [TODO: not sure what section discusses these] are based on a separate workflow that takes as its starting point a weekly tag (\autoref{sec:releases_weekly}) of all packages' \texttt{master} branches.
+[TODO: review this paragraph for accuracy by somebody familiar with the release process. Depending on how bug fixes are handled and to what degree the packages are treated as separate products, it may be that the workflow here plus the release workflow does resemble Gitflow.]
+
