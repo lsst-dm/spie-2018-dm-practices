@@ -1,4 +1,4 @@
-\section{Agile Development}\label{sec:jira_ticket}
+\section{Agile Development}\label{sec:agile}
 
 LSST data management follows a form of cyclic development often referred to as {\emph Agile} methodology. It is also beholden to organizations such as NSF which require a more traditional approach to project development such as the Earned Value Management System (EVMS).
 We have presented this from both  the ESA and LSST perspective in SPIE previously  \cite{2014SPIE.9150E..1EG}.
@@ -18,7 +18,7 @@ The Project assumes that a full-time individual works for a total of
 leave, etc are taken into account. Staff appointed to ``developer''
 positions are expected to devote this effort directly to LSST.
 
-Appointment as a ``scientist'' includes a 20\% personal research time
+Appointment as a {\emph scientist} includes a 20\% personal research time
 allowance. That is, scientists are expected to devote 1,440 hours per
 year to LSST, and the remainder of their time to personal research.
 
@@ -26,7 +26,7 @@ Our base assumption is that 30\% of an individual's LSST time (i.e. 540 hours/ye
 This is similar to the standard {\emph Agile} discount, however in the earned value world that must be accounted for and it is considered Level of Effort (LOE)
 
 
-\section{Long Term Planning}
+\subsection{Long Term Planning}
 \label{sec:long-term-plan}
 
 The plan for the duration of construction is embodied in:
@@ -47,7 +47,7 @@ The plan for the duration of construction is embodied in:
 
 Planning packages are defined at the fourth level of the Work Breakdown Structure (WBS).
 
-All WBS elements are related to the set of Data Management Products embodied in \citep{LDM-148} a high level summary of which is given in
+All WBS elements are related to the set of Data Management Products embodied in \cite{LDM-148} a high level summary of which is given in
 Figure \ref{fig:prods}. Each product has a product owner to guide the agile development, this is frequently one of the Data Management Scientists.
 
 \begin{figure}[htbp]
@@ -67,18 +67,41 @@ Team members then add specific stories to these epics.
 The Jira system is synchronized with the Primavera project management tool every three months using in house tools.
 
 In order for the DM system to reach its science goals, new algorithmic or engineering approaches must sometimes be researched.
-It is appropriate to budget time for this research work in planning packages.
+It is appropriate to budget time for this research work in planning packages and they result in epics of defined length (rather than specific  deliverable).
 Areas where successful delivery of the DM system is dependent on speculative research are a source of risk: where possible, the plan  also provides for a fallback option to be taken when research objectives are not achieved.
 This may also lead to an entry in the risk register.
 
 
+Some work is {\emph emergent}: we can predict in advance that it will be necessary, but we cannot
+predict exactly what form it will take. The typical example of this is fixing bugs: we can reasonably
+assume that bugs will be discovered in the codebase and will need to be addressed,
+but we cannot predict in advance what those bugs will be.
+We included this in the schedule by defining a {\emph bucket} epic in which stories can be created
+when necessary during the course of a cycle.
 
-\section{Reporting }
-Though the EVMS system is reasonable good for reporting it does not report well on Agile progress. Since  \citep{2016SPIE.9911E..0NK} we have undertaken a set of test driven milestones to show progress in Data Management.
+\subsection{Sprinting} \label{sec:spront} \label{sec:jira_ticket}
+The broad plan (to 2022)  laid out in planning packages.
+For a  given  cycle (six months)   more detail is put in the form of epics which  are shared across the teams in a face to face meeting a little ahead of the start of cycle.  The team then start to populate the epics with stories (both of which are Jira tickets)  which are at an appropriate level for day to day planning.
+Within the cycle we follow monthly sprints with the usual agile steps:
+\begin{enumerate}
+\item[Preparation:] Stories for the sprint are chosen and distributed to team members according to available points. This is usually a local team meeting.
+\item[Execution:] As the cycle progresses daily standups are used to catch blockers and clarify stories. At the higher level there are two TCAM standups each week on Tuesday and Friday to raise issues across team boundaries.
+\item[Review:] At cycle end a retrospective should be conducted.
+\end{enumerate}
 
-Epics, stories, P6, milestones, EVMS.
-How do we use product owners?
-Test specifications and requirements.
+We use Jira's
+\href{https://www.atlassian.com/software/jira/agile}{Agile} capabilities
+to manage our sprints. Each technical manager is responsible for
+defining and maintaining their own agile board. The board may be
+configured for either
+\href{https://en.wikipedia.org/wiki/Scrum_(software_development)}{Scrum}
+or \href{https://en.wikipedia.org/wiki/Kanban_(development)}{Kanban}
+style work as appropriate.
 
-How has this evolved since Kantor et al SPIE 2016? (kind of important that we link this SPIE paper to previous SPIE paper on Agile process).
+\subsection{Reporting }
+DM produces a mandatory written monthly report for NSF/DOE in which each team reports on progress and issues. A new addition to this report since last year is to clearly track the state of milestones which have been met or delayed.
+As \cite{2016SPIE.9911E..0NK} pointed out the Primavera system outputs standard project metrics on variance and budget.
+Though this is reasonable  for reporting i hardware based activities it does not report well on Agile progress unless there are well defined deliverables.
+In 2017 we have undertaken to lay out a set of test driven milestones to show progress in Data Management. These milestones are completed by execution of tests laid out in a test specification tying them to requirements, resulting in a test report.
+
 
