@@ -1,16 +1,16 @@
 \section{Agile Development}\label{sec:agile}
 
-LSST data management follows a form of cyclic development often referred to as {\emph Agile} methodology. It is also beholden to organizations such as NSF which require a more traditional approach to project development such as the Earned Value Management System (EVMS).
+LSST data management follows a long term plan with six month cycles. The  development approach falls in the rather  broad {\emph Agile} methodology. It is also beholden to organizations such as NSF which require a more traditional approach to project development such as the Earned Value Management System (EVMS).
 We have presented this from both  the ESA and LSST perspective in SPIE previously  \cite{2014SPIE.9150E..1EG}.
 In 2016  we presented a more complete approach for LSST to the problem of Agile in the earned value world \cite{2016SPIE.9911E..0NK}, here we provide just a brief update on that paper concentrating more on the Agile aspects.
 
 
 \subsection{Management}
-\cite{DMTN-020} provides a guide to the mechanisms underpinning LSST Data Management’s approach to project management, the reader is referred to to this for gory details as required.
-Each institution in the DM team is still typically
+The Project Management Guide \cite{DMTN-020} provides  comprehensive details on the mechanisms underpinning LSST Data Management’s approach to project management, the reader is referred to to that document for gory details as required.
+Each institution in the DM team is typically
 responsible for 1 or more Level 2 WBS elements, and each institution has a Technical/Control Account Manager
 (T/CAM) responsible for planning, estimating, monitoring and EVM reporting for that Level 2 WBS element.
-The detailed management plan is in \cite{LDM-294}.
+The detailed management plan is in LDM-294\cite{LDM-294}.
 
 \subsection{Basic Assumptions}
 The Project assumes that a full-time individual works for a total of
@@ -47,7 +47,7 @@ The plan for the duration of construction is embodied in:
 
 Planning packages are defined at the fourth level of the Work Breakdown Structure (WBS).
 
-All WBS elements are related to the set of Data Management Products embodied in \cite{LDM-148} a high level summary of which is given in
+All WBS elements are related to the set of Data Management Products embodied in the System Design \cite{LDM-148} a high level summary of which is given in
 Figure \ref{fig:prods}. Each product has a product owner to guide the agile development, this is frequently one of the Data Management Scientists.
 
 \begin{figure}[htbp]
@@ -84,9 +84,9 @@ The broad plan (to 2022)  laid out in planning packages.
 For a  given  cycle (six months)   more detail is put in the form of epics which  are shared across the teams in a face to face meeting a little ahead of the start of cycle.  The team then start to populate the epics with stories (both of which are Jira tickets)  which are at an appropriate level for day to day planning.
 Within the cycle we follow monthly sprints with the usual agile steps:
 \begin{enumerate}
-\item[Preparation:] Stories for the sprint are chosen and distributed to team members according to available points. This is usually a local team meeting.
-\item[Execution:] As the cycle progresses daily standups are used to catch blockers and clarify stories. At the higher level there are two TCAM standups each week on Tuesday and Friday to raise issues across team boundaries.
-\item[Review:] At cycle end a retrospective should be conducted.
+\item {\bf Preparation:} Stories for the sprint are chosen and distributed to team members according to available points. This is usually a local team meeting.
+\item {\bf Execution:} As the cycle progresses daily standups are used to catch blockers and clarify stories. At the higher level there are two T/CAM standups each week on Tuesday and Friday to raise issues across team boundaries.
+\item {\bf Review:} At cycle end a retrospective should be conducted.
 \end{enumerate}
 
 We use Jira's
@@ -100,8 +100,8 @@ style work as appropriate.
 
 \subsection{Reporting }
 DM produces a mandatory written monthly report for NSF/DOE in which each team reports on progress and issues. A new addition to this report since last year is to clearly track the state of milestones which have been met or delayed.
-As \cite{2016SPIE.9911E..0NK} pointed out the Primavera system outputs standard project metrics on variance and budget.
-Though this is reasonable  for reporting i hardware based activities it does not report well on Agile progress unless there are well defined deliverables.
+As the previous SPIE paper \cite{2016SPIE.9911E..0NK} pointed out the Primavera system outputs standard project metrics on variance and budget.
+Though this is reasonable  for reporting hardware based activities it does not report well on Agile progress unless there are well defined deliverables.
 In 2017 we have undertaken to lay out a set of test driven milestones to show progress in Data Management. These milestones are completed by execution of tests laid out in a test specification tying them to requirements, resulting in a test report.
 
 
