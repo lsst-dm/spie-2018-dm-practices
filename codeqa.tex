@@ -1,8 +1,32 @@
 \subsection{Code Quality}
 
+LSST DM is responsible for a large amount of code.
+
+Qserv: 70,000 + 23000 comments C++ / 8k lines python: ~100k lines
+Dax: 4000 lines python
+
+% starlink_ast is exempted. Calculation was done on cleaned directories
+% on 2018-04-02.
+% perl ~/Downloads/cloc-1.72.pl $(cat manifest.txt  | awk '{print $1}')
+
+lsst\_distrib consists of 120 packages/repos
+
+--------------------------------------------------------------------------------
+Language                      files          blank        comment           code
+--------------------------------------------------------------------------------
+Python                         1771          54192          95609         192982
+C++                             859          21507          29472         108609
+C/C++ Header                    555          14937          46781          42296
+
+
+
+
+python: 288k
+C++: 227k
+
 Unit tests using pytest.
 
-Flake8 clean with minor excemptions.\label{sec:flake8}
+Flake8 clean with minor exceptions.\label{sec:flake8}
 
 Code coverage.
 
