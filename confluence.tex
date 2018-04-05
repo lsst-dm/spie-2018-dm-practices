@@ -1,11 +1,17 @@
 \subsection{Confluence}
 
-Transient information. Not used to document processes or for reports.
+As part of the Atlassian software suite, we also have a Confluence installation to complement our Jira system.
+Prior to Confluence DM used a Trac system for writing miniutes for meetings, user guides and test reports, and for tracking bugs.
+When we moved to Confluence it was decided to leave Trac running as a historical record, with only a subset of information being migrated to other systems.
+Confluence was initially used in a similar way to Trac but it soon became clear that user guides and reports were not a good fit for the a wiki-style interface.
+Document discovery is hard when reports are pages scattered around a wiki.
+Additionally, user guides should be treated in a similar manner to code so that software releases can easily be associated with the correct version of the document.
+These thoughts, combined with developers' preferences to use \texttt{git} and a markup language less quirky than that supported by Confluence, were some of the key motivations for migrating our documentation standard to restructured text and the creation of the DM Tech Note series.
 
-* Planning hack sessions?
-
-* Integrating Jira tickets into confluence pages to indicate progress.
-
-Meeting minutes
-
-* Short term actions -- migrate to Jira if long term.
+We do use Confluence for other purposes though.
+The ability to embed Jira tickets into pages and for pages to have embedded Jira queries, along with the simple tasks system, makes Confluence an excellent choice for storing meeting minutes.
+We do assign tasks during meetings and track open tasks, but we have a policy to migrate tasks to Jira tickets if it looks like a task is going to involve significant work.
+It can then be scheduled as part of the normal planning process.
+We have found that another place where Confluence is useful is for collaborating on hack sessions.
+A simple table on a page showing the status of related Jira tickets and associated people can help to avoid duplicate work.
+Finally, Confluence can be used for collating information for a transient purpose, with the understanding that if the information is to be persisted it should be migrated to a Tech Note.
