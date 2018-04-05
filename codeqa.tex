@@ -1,33 +1,82 @@
 \subsection{Code Quality}
 
-LSST DM is responsible for a large amount of code.
-
-Qserv: 70,000 + 23000 comments C++ / 8k lines python: ~100k lines
-Dax: 4000 lines python
+LSST DM is responsible for writing and supporting a large code base.
+In April 2018, the Qserv database software\cite{2011Wang:2011:QDS:2063348.2063364} is about 100,000 lines of C++, Firefly has about the same amount of JavaScript\cite{2016SPIE.9913E..0YR}, and the Science Pipelines software\cite{2018PASJ...70S...5B} is approximately 290,000 lines of Python and 225,000 lines of C++.\footnote{Line counts include comments but not blank lines. Python interfaces are implemented using \texttt{pybind11} and that is counted as C++ code. Science pipelines software is defined as the \texttt{lsst\_distrib} metapackage and does not include code from third party packages.}
 
 % starlink_ast is exempted. Calculation was done on cleaned directories
 % on 2018-04-02.
 % perl ~/Downloads/cloc-1.72.pl $(cat manifest.txt  | awk '{print $1}')
+%
+% --------------------------------------------------------------------------------
+% Language                      files          blank        comment           code
+% --------------------------------------------------------------------------------
+% Python                         1771          54192          95609         192982
+% C++                             859          21507          29472         108609
+% C/C++ Header                    555          14937          46781          42296
 
-lsst\_distrib consists of 120 packages/repos
+Code quality is hard to define and notoriously difficult to tackle when hundreds of thousands of lines of code are to be supported.
+In DM we tackle this by employing a number of different strategies.
 
---------------------------------------------------------------------------------
-Language                      files          blank        comment           code
---------------------------------------------------------------------------------
-Python                         1771          54192          95609         192982
-C++                             859          21507          29472         108609
-C/C++ Header                    555          14937          46781          42296
+\begin{itemize}
+  \item Defining a coding standard\cite{devguide} and enforcing it with tooling where possible.
+  \item Ensuring that warnings from static analyzers are dealt with and where possible insisting that builds fail if, for example, a \texttt{flake8} warning is issued.
+  \item Forcing a specific C++ standard and configuring the C++ compiler to fail if a standard is violated.
+  \item Running unit tests for every commit, and generating code coverage and test statistics.
+  \item Issuing verbose warnings, including Python's \texttt{DeprecationWarning}, to warn us of any possible future issues.
+  \item Running regular integration tests and tracking the algorithmic results to ensure that we are improving with time.
+\end{itemize}
 
+\subsubsection{Coding Standards}
+\label{sec:coding-standards}
 
+Over the years, the DM team have defined extensive coding standards\cite{devguide} covering C++ and Python.
+This includes variable naming conventions, indenting policies and also how to document code.
+We use \texttt{numpydoc}\cite{numpydoc} for Python, Doxygen\cite{doxygen} for C++, and JSDoc\cite{jsdoc} for JavaScript and we automate API documentation generation.
 
+Historically we had a very detailed Python standard but in 2017 we significantly simplified the standard by defining it relative to the PEP\,8 standard\cite{pep8}.
+We could not fully adopt PEP\,8 since we had to balance the benefits of automated code linting versus the cost of changing tens of thousands of lines of code.
+In particular, the variable and method naming standard is to use camel case everywhere, and it was felt to be too disruptive to change all the code, especially when it was realized that to minimize confusion we would have to also modify the C++ code that is called from Python.
+There are two other areas where we are not compliant with PEP8.
+Firstly, we disagree with the whitespace rules concerning binary operators and therefore disable this test.
+Secondly, we feel that an 80 character line limit is too short and we continue to use a 110 character limit for code.
+We did experiment with switching to 80 characters for one package, but did not like the result and this motivated us to retain the current limit.
+For documentation and comments we would like to adopt an 80 character limit, PEP\,8 does specify they should be different to code lines, but at this time there is no tooling in place to warn of non-compliance.
+We have written and submitted a patch to the \texttt{pycodestyle} tool to implement a check for this, but at this time it has not been accepted.
+The \texttt{flake8} tool is used to validate code compliance and we are happy with the results.
+Code reviews no longer waste time worrying about whether a space should be in a particular place and can now focus on the code functionality.
 
-python: 288k
-C++: 227k
+From our experience of benefiting from running \texttt{flake8} on the Python code base, we investigated options for C++ and defined a set of rules consistent with the C++ style guide that can be used to enforce that standard using the \texttt{clang-format}\cite{clangformat} tool.
+We are currently updating the C++ code incrementally as new changes are made, and we hope to soon be able to run \texttt{clang-format} as part of an automated check when pull requests are created on GitHub.
 
-Unit tests using pytest.
+\subsubsection{Language Standards}
 
-Flake8 clean with minor exceptions.\label{sec:flake8}
+We do not require a specific C++ compiler to build the DM software, but we do require compliance with a specific version of the standard.
+DM code must currently meet the C++14 standard and we configure the Clang and GCC compilers to fail if the code is non-compliant.
+There is still code that uses C++11 and older style but we are slowly updating the code as we encounter constructs that can be improved or simplified.
+We are monitoring the evolution of the C++17 standard.
 
-Code coverage.
+The DM python code was begun in the era of Python 2.3, and was targeting Python 2.7 by 2016.
+At that time it was becoming increasingly clear, given the commissioning timeline for LSST and the support schedule for Python 2.7, that Python 3 would have to be supported and we completed the migration to support both Python 3 and 2.7 during 2017\cite{2016arXiv161100751J}.
+In April 2018 we dropped support for Python 2 and have now standardized on Python 3.6\cite{2017arXiv171200461J}.
+This will allow us to use Python 3 features for the first time.
 
-Clang-format.
+\subsubsection{Unit Testing}
+
+Unit testing is critically important when writing any code.
+In DM we do almost all our testing from Python using the \texttt{unittest} module and we test the C++ code by using the Python bindings.
+Tests are run using \texttt{pytest}\cite{pytest} and this provides some useful features via plugins.
+We run the tests in a multi-process mode, based on the number of cores on the system, and all code is tested with \texttt{flake8} for compliance.
+The output from the tests, including failure information, test count, and execution time, are written in JUnit XML format and is parsed by the Jenkins system to provide a test report to the relevant developer.
+We are also investigating the code coverage plugin and intend to record metrics of code coverage and test execution time as a function of time for long term trending analysis.
+Tests run with full Python warnings enabled, including \texttt{DeprecationWarning}, and we expect these warnings to be fixed.
+Newer versions of \texttt{numpy} began warning when \texttt{NaN}s are used in numerical calculations and we have had to disable those warnings on a case-by-case basis once we understand that \texttt{NaN} is a reasonable value for that particular code path; we decided not to globally disable all the numeric warnings.
+
+\subsubsection{Algorithmic Performance Tracking}
+
+At its most basic, the LSST DM team has to deliver algorithms that can calculate results for photometry and astrometry with sufficient accuracy to meet the overall science requirements of the LSST\cite{LPM-17}.
+Additionally, we have fixed timing and computational performance requirements and our algorithms must fit within the expected compute resources.
+It is important for us to know quickly if an algorithm suddenly gets worse during code development.
+We have developed a set of Key Performance Metrics that we calculate on a weekly basis using precursor data from instruments on CFHT and Subaru.
+These metrics are logged with the SQuaSH system\cite{SQR-009} to enable scientists to examine trends and look for anomalies, and to allow developers to test their development branches to ensure that there aren't unexpected regressions in algorithmic performance.
+One complication with this approach is that the performance depends critically on the quality of our test dataset and as we approach commissioning we need a set of test data that allow us to be confident that the algorithms are suitable for LSST.
+Another issue we find, is that sometimes an improvement in the source detection phase can change the source count in unexpected ways and that can shift the result when the final catalog is analyzed even if there has been no change to the code that calculates the metric.

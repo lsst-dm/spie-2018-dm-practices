@@ -30,7 +30,7 @@ If we did not rebase before merging, merge commits could include significant cle
 
 The LSST workflow has changed in two significant ways since it was first introduced.
 Originally, developers were allowed to commit fixes to Python docstrings and C++ documentation comments directly to \texttt{master}, without the need to create a ticket branch.
-However, as we expanded our tests to enforce coding style guidelines (\autoref{sec:flake8}), documentation edits began triggering build failures.
+However, as we expanded our tests to enforce coding style guidelines (\autoref{sec:coding-standards}), documentation edits began triggering build failures.
 In the current workflow all changes to code files, including documentation-only changes, must be made on branches and go through the review and testing process.
 
 In addition, the workflow was at first enforced by individual developers and their reviewers.
