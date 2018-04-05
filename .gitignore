@@ -220,3 +220,6 @@ TSWLatexianTemp*
 
 # expex forward references with \gathertags
 *-tags.tex
+
+# macOS-specific hidden files
+.DS_Store
