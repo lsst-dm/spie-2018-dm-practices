@@ -1,6 +1,6 @@
 \section{Model-Based Systems Engineering}
 
-LSST uses Model-Based Systems Engineering, with designs, requirements, and behavior described using the SysML language and stored within a database-backed tool, initially Enterprise Architect and now MagicDraw.
+LSST uses Model-Based Systems Engineering\cite{2014SPIE.9150E..0MC}, with designs, requirements, and behavior described using the SysML language and stored within a database-backed tool, initially Enterprise Architect and now MagicDraw.
 MagicDraw permits communication between teams through a unified model of the system.
 It also allows for relatively easy maintenance of the requirements at all levels of the system as well as traceability between requirements and the system components that satisfy them.
 
@@ -22,16 +22,17 @@ Requirements document organization into sections is handled by grouping requirem
 Numbers prefixed to the titles of the packages and the requirements within them allow them to be sorted into a human-meaningful order.
 These numbers are sequential within a containing package, not hierarchical, making renumbering and reorganization easier.
 Requirements documents are generated using one of two custom macros, one for Microsoft Word documents and another for LaTeX documents.
-The document generation macros strip off the sequential prefix numbers, allowing the word processing tools to create the hierarchical section and requirement title numbers.
+The document generation macros sort the elements within packages and strip off the sequential prefix numbers, allowing the word processing tools to create the hierarchical section and requirement title numbers.
+When LaTeX is used, the generated files are stored in git repositories and then follow the standard DM documentation release process.
 
 \subsection{Requirements Documents}
 
 Five levels of requirements documents are applicable to Data Management.
-At the highest level, the LSST Science Requirements Document (SRD) sets out the overall scientific goals of the project in prose.
-The LSST System Requirements are the project's formal response to the SRD, setting minimum, design, and "stretch" goals for requirement parameters.
-The Observatory System Specification documents requirements and budgets based on a high-level design, in particular partitioning the LSST system into Telescope \& Site, Camera, Data Management, and Education \& Public Outreach subsystems.
-At this level, the Data Products Definition Document provides a full specification of the data products to be delivered by the LSST system.
-The Data Management System Requirements (DMSR) are the flowdown to DM specifically.
+At the highest level, the LSST Science Requirements Document (SRD)\cite{LPM-17} sets out the overall scientific goals of the project in prose.
+The LSST System Requirements\cite{LSE-29} are the project's formal response to the SRD, setting minimum, design, and "stretch" goals for requirement parameters.
+The Observatory System Specifications\cite{LSE-30} documents requirements and budgets based on a high-level design, in particular partitioning the LSST system into Telescope \& Site, Camera, Data Management, and Education \& Public Outreach subsystems.
+At this level, the Data Products Definition Document\cite{LSE-163} provides a full specification of the data products to be delivered by the LSST system.
+The Data Management System Requirements (DMSR)\cite{LSE-61} are the flowdown to DM specifically.
 At the same level as the DMSR, Interface Control Documents (ICDs) specify the relationships between the different subsystems.
 Finally, within the DM system, component requirements documents are used where appropriate to constrain designs and provide for internal verification.
 
@@ -48,4 +49,4 @@ Since system components are also present in the MagicDraw model, the tool also h
 
 Ultimately, SysML and MagicDraw have been most useful for systems engineering purposes at the LSST system level, rather than within the Data Management system itself.
 While the tool is fully capable of recording component designs in diagrammatic language, adoption has been somewhat difficult; developers tend to prefer to work directly on code.
-In its place, more limited diagrams are produced using other tools such as OmniGraffle, Gliffy (particularly with the Confluence plugin), LaTeX, Archi, and websequencediagrams.com.
+In its place, more limited diagrams are produced using other tools such as OmniGraffle, Gliffy (particularly with the Confluence plugin), LaTeX, Archi, and \href{http://websequencediagrams.com}{websequencediagrams.com}.
