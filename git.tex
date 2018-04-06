@@ -5,16 +5,30 @@ To enable concurrent development across all six LSST sites, the LSST development
 
 \subsubsection{Version Control}\label{sec:git}\label{sec:subversion}
 
-[TODO: why did LSST switch from Subversion to Git?]
+[TODO: why did LSST switch from Subversion to Git?] [Isn't the question: Why did it take so long to move to Git?]
+
+Move happened in November 2011.
+
+Stash to GitHub also happened around 2015.
 
 \subsubsection{Code Organization}\label{sec:git_repositories}
 
-The data management system is divided into several hundred individual Git repositories, hosted on GitHub\footnote{\url{http://github.com/lsst/}}.
+The data management system is divided into several hundred individual Git repositories, hosted on GitHub\footnote{\url{http://github.com/lsst/} and \url{https://github.com/lsst-dm/}}.
 Each repository corresponds to one code package, and all but a handful of repositories usually have at most one developer working on them at a time.
 Isolating code in small repositories minimizes the need for developers to frequently download code updates, something the Git framework requires whenever developers make concurrent changes to the \texttt{master} branch of the same repository.
 Representing each package by an independent repository also makes it easy to formalize and track inter-package dependencies using tools like EUPS (\autoref{sec:eups}).
 
 \subsubsection{The LSST Workflow}\label{sec:dev_workflow}
+
+\begin{figure}[t]
+\begin{center}
+  \includegraphics[width=0.7\textwidth]{git-history}
+\end{center}
+\caption{A subset of the commit history from one of the LSST packages showing how each feature branch has been rebased before merging to \texttt{master}, resulting in an empty merge commit.
+The history also shows the tags for the weekly releases and a recent release candidate.
+\label{fig:commitlog}
+}
+\end{figure}
 
 LSST software development is based on the shared repository model: work is done on branches of a single repository rather than on user forks.
 Development work is associated with a Jira ticket (\autoref{sec:jira_ticket}), and keeping all work in a shared repository makes it easier to link code changes to their corresponding Jira tickets.
@@ -23,7 +37,7 @@ This in turn makes it easier to audit work in terms of Jira tickets.
 All work associated with a specific Jira ticket is done on a feature branch named after that ticket.
 Developers must test their branch as part of the full data management system (\autoref{sec:jenkins}) before the code is considered ready to review or merge.
 GitHub pull requests from the ticket branch to \texttt{master} are used for code review, but not to merge the code.
-Instead, feature branches are merged by first rebasing them onto the latest version of \texttt{master}, then forcing a merge without Git's fast-forward optimization.
+Instead, feature branches are merged by first rebasing them onto the latest version of \texttt{master}, then forcing a merge without Git's fast-forward optimization (Fig.~\ref{fig:commitlog}).
 This creates an empty merge commit that serves as a marker to distinguish which commits on \texttt{master} came from which feature branch.
 Rebasing ensures the Git commit history appears linear to later inspection, and that all ticketed work is present on the corresponding branch.
 If we did not rebase before merging, merge commits could include significant cleanup work that would be difficult to resolve into their original tickets.
