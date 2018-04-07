@@ -1,15 +1,17 @@
 \subsection{Development Model}\label{sec:development}
 
-To enable concurrent development across all six LSST sites, the LSST development team uses a decentralized development model based on the Git version control system\footnote{\url{https://git-scm.com/}}.
+To enable concurrent development across all the LSST DM sites, the development team uses a decentralized development model based on the Git version control system\footnote{\url{https://git-scm.com/}}.
 [TODO: describe in terms of Agile values?]
 
 \subsubsection{Version Control}\label{sec:git}\label{sec:subversion}
 
-[TODO: why did LSST switch from Subversion to Git?] [Isn't the question: Why did it take so long to move to Git?]
+The choice of version control system has triggered many debates over the years but for DM with a distributed team working across multiple time zones it became clear in 2011 that DM should move its source code from Subversion to Git.
+The advantages of Git over Subversion are well-documented, but one key advantage for a distributed team is the ability to work locally and make detailed commits without requiring that the remote server is always running.
+It was decided that the best fit for our monolithic Subversion repository was to convert it to many individual Git repositories, as is common practice.
 
-Move happened in November 2011.
-
-Stash to GitHub also happened around 2015.
+Initially we used gitolite for hosting git repositories on our own servers but in late 2014 we decided that we should move all development to GitHub\cite{Document-17187}.
+DM was already a strong advocate of open development within LSST and this change made it considerably easier for the wider community to see what we were doing.
+The move was completed by 2015 and whilst some developers were initially ambivalent about the change, after three years there is now a strong feeling that this was absolutely the correct decision and it has made it easier to leverage tools such as Travis, improved our code review abilities, and made it easier to link our pull requests to issues in other people's repositories.
 
 \subsubsection{Code Organization}\label{sec:git_repositories}
 
