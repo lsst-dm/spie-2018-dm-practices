@@ -45,17 +45,23 @@ We have written and submitted a patch to the \texttt{pycodestyle} tool to implem
 The \texttt{flake8} tool is used to validate code compliance and we are happy with the results.
 Code reviews no longer waste time worrying about whether a space should be in a particular place and can now focus on the code functionality.
 
-From our experience of benefiting from running \texttt{flake8} on the Python code base, we investigated options for C++ and defined a set of rules consistent with the C++ style guide that can be used to enforce that standard using the \texttt{clang-format}\cite{clangformat} tool.
+From our experience of benefiting from running \texttt{flake8} on the Python code base, we investigated options for C++.
+Our code layout and formatting rules were updated to be based on the Google C++ Style Guide\cite{googlestyle} with a few minor modifications, such as 4 space indentation and a 110 character line limit to maintain consistency with our Python coding standards.
+This allowed us to easily enforce these rules using the \texttt{clang-format}\cite{clangformat} tool with minimal additional configuration.
 We are currently updating the C++ code incrementally as new changes are made, and we hope to soon be able to run \texttt{clang-format} as part of an automated check when pull requests are created on GitHub.
+
+We are also investigating C++ linting with \texttt{clang-tidy}\cite{clangtidy}. Although higher runtime and configuration cost at this time make it unlikely to be used for automatic linting at pull-request-time, it is still a valuable tool in our workflow.
+Because it is based on the Clang C++ compiler \texttt{clang-tidy} has access to all the requisite information needed to find common causes for bugs using static analysis, identify things that are hard to find by eye (such as which \texttt{0} represents a pointer value to be replaced by \texttt{nullptr} and which member function overrides a virtual function from a base class to be marked with \texttt{override}), and automatically update a whole codebase to use features from modern C++.
+One valuable check for \cite{clangtidy} to perform at pull-request-time might be enforcing identifier (e.g. classes, functions and variables) naming rules.
 
 \subsubsection{Language Standards}
 
 We do not require a specific C++ compiler to build the DM software, but we do require compliance with a specific version of the standard.
-DM code must currently meet the C++14 standard and we configure the Clang and GCC compilers to fail if the code is non-compliant.
+DM code must currently meet the ISO C++14 standard\cite{cpp14} and we configure the Clang and GCC compilers to fail if the code is non-compliant.
 There is still code that uses C++11 and older style but we are slowly updating the code as we encounter constructs that can be improved or simplified.
-We are monitoring the evolution of the C++17 standard.
+We are monitoring the support of the C++17 standard in common compilers.
 
-The DM python code was begun in the era of Python 2.3, and was targeting Python 2.7 by 2016.
+The DM Python code was begun in the era of Python 2.3, and was targeting Python 2.7 by 2016.
 At that time it was becoming increasingly clear, given the commissioning timeline for LSST and the support schedule for Python 2.7, that Python 3 would have to be supported and we completed the migration to support both Python 3 and 2.7 during 2017\cite{2016arXiv161100751J}.
 In April 2018 we dropped support for Python 2 and have now standardized on Python 3.6\cite{2017arXiv171200461J}.
 This will allow us to use Python 3 features for the first time.
