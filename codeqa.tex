@@ -52,7 +52,7 @@ We are currently updating the C++ code incrementally as new changes are made, an
 
 We are also investigating C++ linting with \texttt{clang-tidy}\cite{clangtidy}. Although higher runtime and configuration cost at this time make it unlikely to be used for automatic linting at pull-request-time, it is still a valuable tool in our workflow.
 Because it is based on the Clang C++ compiler \texttt{clang-tidy} has access to all the requisite information needed to find common causes for bugs using static analysis, identify things that are hard to find by eye (such as which \texttt{0} represents a pointer value to be replaced by \texttt{nullptr} and which member function overrides a virtual function from a base class to be marked with \texttt{override}), and automatically update a whole codebase to use features from modern C++.
-One valuable check for \texttt{clang-tidy} to perform at pull-request-time might be enforcing identifier (e.g. classes, functions and variables) naming rules.
+One valuable check for \texttt{clang-tidy} to perform at pull-request-time might be enforcing identifier (for example, classes, functions and variables) naming rules.
 
 \subsubsection{Language Standards}
 

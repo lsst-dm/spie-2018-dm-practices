@@ -14,7 +14,7 @@ Test cases are developed from requirements and behavior.
 
 \subsection{Requirements}
 
-Requirements are written using a combination of a formal specification, which uses verbs such as "shall" and "will" in a stylized manner, along with a description that explains the context and interpretation of the requirement.
+Requirements are written using a combination of a formal specification, which uses verbs such as ``shall'' and ``will'' in a stylized manner, along with a description that explains the context and interpretation of the requirement.
 Constraints are added to the requirement that document values of parameters used within the specification, along with their descriptions and units.
 Each requirement is given a unique identifier generated based on its containing document and a monotonically-increasing sequence number.
 This requirement id allows requirements to be safely referred to and linked together even if the containing document is reorganized or if a requirement is deleted or replaced by another.
@@ -29,7 +29,7 @@ When LaTeX is used, the generated files are stored in git repositories and then 
 
 Five levels of requirements documents are applicable to Data Management.
 At the highest level, the LSST Science Requirements Document (SRD)\cite{LPM-17} sets out the overall scientific goals of the project in prose.
-The LSST System Requirements\cite{LSE-29} are the project's formal response to the SRD, setting minimum, design, and "stretch" goals for requirement parameters.
+The LSST System Requirements\cite{LSE-29} are the project's formal response to the SRD, setting minimum, design, and ``stretch'' goals for requirement parameters.
 The Observatory System Specifications\cite{LSE-30} documents requirements and budgets based on a high-level design, in particular partitioning the LSST system into Telescope \& Site, Camera, Data Management, and Education \& Public Outreach subsystems.
 At this level, the Data Products Definition Document\cite{LSE-163} provides a full specification of the data products to be delivered by the LSST system.
 The Data Management System Requirements (DMSR)\cite{LSE-61} are the flowdown to DM specifically.
@@ -39,8 +39,8 @@ Finally, within the DM system, component requirements documents are used where a
 \subsection{Flowdown}
 
 One of the excellent features of MagicDraw is the ability to rapidly document the flowdown of requirements.
-Using a table with higher-level requirements on one side and lower-level requirements on the other, the "refines" relationship between the latter and the former can be created by merely toggling an arrow within appropriate table cells.
-Unfortunately, it is more difficult to use the SysML "copy" relationship in cases where the lower-level requirement happens to be identical to the higher-level one.
+Using a table with higher-level requirements on one side and lower-level requirements on the other, the ``refines'' relationship between the latter and the former can be created by merely toggling an arrow within appropriate table cells.
+Unfortunately, it is more difficult to use the SysML ``copy'' relationship in cases where the lower-level requirement happens to be identical to the higher-level one.
 It has been necessary to manually copy the requirement text (and generate a new requirement id, of course).
 
 Since system components are also present in the MagicDraw model, the tool also helps with recording which requirements apply to each component, and, conversely, which components are needed to satisfy each requirement.
