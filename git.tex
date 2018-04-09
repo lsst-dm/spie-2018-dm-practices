@@ -18,7 +18,7 @@ The move was completed by 2015 and whilst some developers were initially ambival
 The data management system is divided into several hundred individual Git repositories, hosted on GitHub\footnote{\url{http://github.com/lsst/} and \url{https://github.com/lsst-dm/}}.
 Each repository corresponds to one code package, and all but a handful of repositories usually have at most one developer working on them at a time.
 Isolating code in small repositories minimizes the need for developers to frequently download code updates, something the Git framework requires whenever developers make concurrent changes to the \texttt{master} branch of the same repository.
-Representing each package by an independent repository also makes it easy to formalize and track inter-package dependencies using tools like EUPS (\autoref{sec:eups}).
+Representing each package by an independent repository also makes it easy to formalize and track inter-package dependencies using tools like EUPS (\S\ref{sec:eups}).
 
 \subsubsection{The LSST Workflow}\label{sec:dev_workflow}
 
@@ -33,11 +33,11 @@ The history also shows the tags for the weekly releases and a recent release can
 \end{figure}
 
 LSST software development is based on the shared repository model: work is done on branches of a single repository rather than on user forks.
-Development work is associated with a Jira ticket (\autoref{sec:jira_ticket}), and keeping all work in a shared repository makes it easier to link code changes to their corresponding Jira tickets.
+Development work is associated with a Jira ticket (\S\ref{sec:jira_ticket}), and keeping all work in a shared repository makes it easier to link code changes to their corresponding Jira tickets.
 This in turn makes it easier to audit work in terms of Jira tickets.
 
 All work associated with a specific Jira ticket is done on a feature branch named after that ticket.
-Developers must test their branch as part of the full data management system (\autoref{sec:jenkins}) before the code is considered ready to review or merge.
+Developers must test their branch as part of the full data management system (\S\ref{sec:jenkins}) before the code is considered ready to review or merge.
 GitHub pull requests from the ticket branch to \texttt{master} are used for code review, but not to merge the code.
 Instead, feature branches are merged by first rebasing them onto the latest version of \texttt{master}, then forcing a merge without Git's fast-forward optimization (Fig.~\ref{fig:commitlog}).
 This creates an empty merge commit that serves as a marker to distinguish which commits on \texttt{master} came from which feature branch.
@@ -46,7 +46,7 @@ If we did not rebase before merging, merge commits could include significant cle
 
 The LSST workflow has changed in two significant ways since it was first introduced.
 Originally, developers were allowed to commit fixes to Python docstrings and C++ documentation comments directly to \texttt{master}, without the need to create a ticket branch.
-However, as we expanded our tests to enforce coding style guidelines (\autoref{sec:coding-standards}), documentation edits began triggering build failures.
+However, as we expanded our tests to enforce coding style guidelines (\S\ref{sec:coding-standards}), documentation edits began triggering build failures.
 In the current workflow all changes to code files, including documentation-only changes, must be made on branches and go through the review and testing process.
 
 In addition, the workflow was at first enforced by individual developers and their reviewers.

@@ -9,9 +9,7 @@ On the one hand there were discussions relating to changes in the baseline desig
 The other type of request related to requests from developers for modification to APIs, changes to compilers or build environemts, and changes to the coding style.
 These latter issues generate debate from the people most directly affected by them and delays of weeks whilst a SAT meeting was convened, combined with the developers feeling they were not part of the deicsion making, led to much frustration.
 
-[show Jira RFC workflow here?]
-
-In 20?? we decided to change our approach to the latter process.
+In 2014 we decided to change our approach to the latter process.
 DM developers have to be familiar with Jira and we developed a Jira workflow for ``Request for Comments'' (RFCs).
 RFCs were designed to empower individual developers to propose decisions.
 Emphasis is placed on the developer being responsible for any fall out from a change.
@@ -25,11 +23,12 @@ On adoption, an RFC must be associated with actual work by filing tickets in DM 
 The DM Systems Engineer is tasked with looking at RFCs on a weekly basis to ensure that proposed RFCs are not languishing and that implemented RFCs are correctly marked as such.
 The \emph{Implemented} state is recognized by scanning all the \emph{Adopted} RFCs and seeing that all triggered work has been completed.
 
-The RFC process has been extremely successful with N RFCs filed since 201? and M implemented.
-We have found that some RFCs are filed asking for changes that the proposer feels are a good change to make but which they themselves are not going to be repsonsible for implementing.
+The RFC process has been extremely successful with 467 RFCs filed since 2014, with 321 implemented, 51 withdrawn, 5 flagged, and 90 adopted with work pending.
+We have found that some RFCs are filed asking for changes that the proposer feels are a good change to make but which they themselves are not going to be responsible for implementing.
 These are sometimes a very good idea but since there is no lead implementer, RFCs like this depend on T/CAMs picking up the work and scheduling it as part of their normal planning process.
 
 \subsection{Change Control Board}
+\label{sec:ccb}
 
 The LSST has a project level Change Control Board (CCB) for managing evolution of budgets, requirements and subsystem interfaces.
 The LSST CCB meets regularly with formal meetings each month and weekly video calls.
@@ -39,6 +38,7 @@ We do use Jira for work directly resulting from a CCB investigation, or for noti
 
 Inside DM we have our own formal CCB that has evolved over the years from the SAT to something we called the Technical Control Team (TCT) but which has now been reorganized as the DM CCB.
 The DM CCB is chaired by the DM Systems Engineer and has representation from senior members of each DM team as well as the DM Project Manager and DM Subsystem Scientist.
-DM CCB uses the same RFC process as described above, but issues to be discussed by the TCT are immediately submitted into the \emph{Flagged} state.
-This is mainly used to discuss changes to the baseline documents and is also used to give formal DM approval to changes that DM are requesting to be made in project level documentation.
-When deemed necessary some RFCs may require a video meeting to allow more direct discussion.
+DM CCB uses the same RFC process as described above, but issues to be discussed by the DM CCB are immediately submitted into the \emph{Flagged} state.
+This is mainly used to discuss changes to the baseline documents and to approve test reports associated with formal milestones.
+It is also used to give formal DM approval to changes that DM would like to be made in project level documentation.
+When deemed necessary some RFCs may require a video conference meeting to allow more direct discussion.
