@@ -1,5 +1,44 @@
 \section{Decision Making Process}
 
-\subsection{RFCs}
+During the research and development phase of the project, DM used a formal process for approving all changes to the DM system.
+The SAT consisted of scientists and system architecture representatives and had regular meetings to discuss matters arising.
+As the team size expanded into construction we realized that as the number of decisions to be made grew, fewer decisions were being made. (did we suffer from bikeshedding so I can cite that original story?)
+
+We realized that there were two distinct classes of changes being discussed by the SAT.
+On the one hand there were discussions relating to changes in the baseline design, requirements, budget, and sizing model, and the SAT membership was optimized to discuss these issues.
+The other type of request related to requests from developers for modification to APIs, changes to compilers or build environemts, and changes to the coding style.
+These latter issues generate debate from the people most directly affected by them and delays of weeks whilst a SAT meeting was convened, combined with the developers feeling they were not part of the deicsion making, led to much frustration.
+
+[show Jira RFC workflow here?]
+
+In 20?? we decided to change our approach to the latter process.
+DM developers have to be familiar with Jira and we developed a Jira workflow for ``Request for Comments'' (RFCs).
+RFCs were designed to empower individual developers to propose decisions.
+Emphasis is placed on the developer being responsible for any fall out from a change.
+If they propose an API change, they are agreeing that they will fix any breakage in other DM code; if they are proposing a change to the style guide they will make the change to the style guide.
+When an RFC is submitted it enters the \emph{Proposed} state and the proposal is mailed to the DM developer list and an announcement is made on the main DM Slack channel.
+For changes that are expected to have no real impact outside of a single package, a due date of 3 days is acceptable.
+For changes that might result in significant debate, for example adding a new package to be supported by DM or changing an API used by many packages, the proposer is advised to give at least a week and possibly two weeks for debate.
+Any one can comment on the RFC and when consensus is reached the RFC can be \emph{Adopted} by the proposer.
+If consensus could not be reached the proposer has the option of withdrawing the RFC completely, adding more time, or flagging the RFC to the Change Control Board for more formal decision making.
+On adoption, an RFC must be associated with actual work by filing tickets in DM Jira and connecting them with an ``is triggering'' relationship.
+The DM Systems Engineer is tasked with looking at RFCs on a weekly basis to ensure that proposed RFCs are not languishing and that implemented RFCs are correctly marked as such.
+The \emph{Implemented} state is recognized by scanning all the \emph{Adopted} RFCs and seeing that all triggered work has been completed.
+
+The RFC process has been extremely successful with N RFCs filed since 201? and M implemented.
+We have found that some RFCs are filed asking for changes that the proposer feels are a good change to make but which they themselves are not going to be repsonsible for implementing.
+These are sometimes a very good idea but since there is no lead implementer, RFCs like this depend on T/CAMs picking up the work and scheduling it as part of their normal planning process.
 
 \subsection{Change Control Board}
+
+The LSST has a project level Change Control Board (CCB) for managing evolution of budgets, requirements and subsystem interfaces.
+The LSST CCB meets regularly with formal meetings each month and weekly video calls.
+The CCB process itself is mediated by a bespoke Drupal web app written early in the life of the project; this can lead to confusion when new people are asked to use the system and we would like to switch to Jira, if only that it would be one less tool to use and we could easily link work tickets to LSST Change Requests (LCRs).
+Currently, there is no relationship between the LCR number and the URL and this is one of the main sources of friction with the system when seen from outside the CCB.
+We do use Jira for work directly resulting from a CCB investigation, or for noting issues with project level change-controlled documentation that may need to be addressed when the person does not necessarily have a formal request prepared.
+
+Inside DM we have our own formal CCB that has evolved over the years from the SAT to something we called the Technical Control Team (TCT) but which has now been reorganized as the DM CCB.
+The DM CCB is chaired by the DM Systems Engineer and has representation from senior members of each DM team as well as the DM Project Manager and DM Subsystem Scientist.
+DM CCB uses the same RFC process as described above, but issues to be discussed by the TCT are immediately submitted into the \emph{Flagged} state.
+This is mainly used to discuss changes to the baseline documents and is also used to give formal DM approval to changes that DM are requesting to be made in project level documentation.
+When deemed necessary some RFCs may require a video meeting to allow more direct discussion.
