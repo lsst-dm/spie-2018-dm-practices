@@ -1,11 +1,11 @@
 \subsection{How we build documentation}
 \label{sec:doc_builds}
 
-Besides creating documentation content, we invest in infrastructure that helps us more effectively create and serve that documentation. 
+Besides creating documentation content, we invest in infrastructure that helps us more effectively create and serve that documentation.
 Overall, we use a ``docs-like-code'' approach.\cite{Gentle:2017}
 This means, broadly, that we write documentation like we write code by using plain text source formats, Git and GitHub for version control and collaboration, and continuous integration servers for both validating the content and deploying it to web servers.
 For a code development organization like ours, this has several advantages.
-By using the same development processes for both code and documentation, our developers need minimal additional training and documentation. 
+By using the same development processes for both code and documentation, our developers need minimal additional training and documentation.
 In the particular case of software user documentation, the docs-like-code approach ensures that documentation is versioned with the software since both reside in the same Git repository.
 The docs-like-code approach is also convenient for building custom tooling to automate documentation processes and integrate with the code base.
 
@@ -21,7 +21,7 @@ The static documentation approach also lends itself to \emph{versioned} document
 \textit{LSST the Docs} uses URL path prefixes to deliver documentation for different versions of the same project.
 In fact, we often deploy draft versions of documentation based on Git branches to support code reviews.
 
-Finally, \textit{LSST the Docs}'s modular architecture make it easy to integrate into many kinds of software continuous integration pipelines. 
+Finally, \textit{LSST the Docs}'s modular architecture make it easy to integrate into many kinds of software continuous integration pipelines.
 Generally all documentation projects hosted on \textit{LSST the Docs} have some form of continuous integration server.
 Our LaTeX projects and technical notes are built with Travis CI, triggered automatically by GitHub activity.
 Documentation for the larger, and more complex, LSST Stack software is built on a Jenkins CI server.
@@ -35,11 +35,11 @@ In the next sections we describe the build systems for specific types of DM docu
 \label{sec:latex_tooling}
 
 We write most project documentation (add reference) with LaTeX.
-To standardize these documents, and ease maintenance, we use a lsst-texmf\footnote{\url{https://github.com/lsst-texmf}} package (based on LaTeX classes developed for Gaia) that provide a document class, styles, and bibliography styles.
+To standardize these documents, and ease maintenance, we use a lsst-texmf\cite{lsst-texmf} LaTeX package (based on LaTeX classes developed for Gaia) that provide a document class, styles, and bibliography styles.
 The package also contains a common list of acronyms to populate document glossaries.
 Additionally, we package common BibTeX bibliography files in the lsst-texmf repository.
 Every DM LaTeX document is expected to upstream all of its citations into these common bibliography files.
-We also maintain a common repository of images,\footnote{\url{https://github.com/lsst-dm/images}} though in a separate Git repository. 
+We also maintain a common repository of images, though in a separate Git repository.
 Our LaTeX documents typically incorporate these images as a Git submodule.
 
 We practice continuous integration and delivery of our LaTeX documents.
