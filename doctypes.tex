@@ -1,19 +1,67 @@
 \subsection{Types of Documentation}
+\label{sec:doc_types}
+
+Data Management creates a variety of documentation for different audiences, and with different purposes.
+Broadly, we break documentation efforts into two categories: project documentation and user documentation.
+Project documentation is a tree of requirements documents, interface control documents, design documents, and test reports that aides the construction project.
+User documentation, on the other hand, is a deliverable that we ship alongside our software and services to either the scientific community or future developers and operators.
 
 \subsubsection{Project documentation}
+\label{sec:project_docs}
 
-* Controlled
+\paragraph{Documentation tree}
 
-* Technical notes
+DM creates project documentation that fits within LSST's overall Document Management Plan.\cite{LPM-51}
+As is standard practice, we organize the collection of project documents in a tree.
+LSST Project Management and Systems Engineering requirements documents form the tree's trunk, along with interface control documents that DM collaborates on with other LSST subsystems.
+These flow into Data Management requirements documents for each DM product: Database,\cite{LDM-555} Middleware,\cite{LDM-556} Science Platform,\cite{LDM-554} and Data Management System Design.\cite{LDM-148}
+From these, we maintain design documents: Database Design,\cite{LDM-135} Middleware Design,\cite{LDM-152} Science Platform Design,\cite{LDM-542} Services and Infrastructure Design,\cite{LDM-129} Pipeline Design,\cite{LDM-151} and Network Design.\cite{LSE-78}
+Then from each design document, we maintain test specification documents.
+Overall, the DM Validation and Test Plan\cite{LDM-503} coordinates these test specifications.
+Finally, we write test reports that implement the test plans.
 
-* texmf: class file for latex. shared bibtex, even for rst.
+We have processes for managing project documents and revisions.
+The DM Change Control Board (DM-CCB) reviews documents and revisions before they become the accepted baseline.
+The DM-CCB also reviews test reports and approves those that specifically refer to formal milestones in the LDM-503 verification and test plan.
+
+\paragraph{Technical notes}
+
+We recognized that DM team members needed to write documents as a means of communication within the project.
+These documents might be design proposals, summaries of data processing experiments, or descriptions of a new internal tool or service.
+This content does not fit within the formal document tree, nor does it require oversight from the DM-CCB.
+Technical notes fit this niche for DM.
+
+Since the defining characteristic of technical notes is the editorial independence of their authors, we sought to automate as much of the maintenance surrounding these documents as possible.
+By allowing an author to create a new document and publishing it without either seeking permission or waiting on a human coordinator, we maximize the likelihood that DM team members will choose to share information through technical notes.
+Thus we have implemented a self-service system based on ChatOps that allows any Data Management staff member to create and publish a technical note (\ref{sec:chatops}).
+These technical notes are edited on GitHub and published as websites, and in the future, we plan to make these documents readily citeable with DOIs and listings in archives.
+
+As a cultural benefit, we see technical notes as a way for junior members to gain exposure within the project, and beyond, by publishing a citeable article featuring their contributions.
+
+\paragraph{Developer Guide}
+
+The DM team is large and distributed, yet we need to work coherently.
+An effective way to promote this is through strong documentation of internal processes and policies.
+These range from a description of how we communicate, to the development workflow, code style guides, and user guides for internal services.
+While we could conceivably publish this information as a kind of project documentation (see above), the content of the Developer Guide doesn't fit into a narrative format.
+Instead, the content is made up of isolated, yet inter-linked, how-to pages and guides.
+Thus we chose to publish our Developer Guide as a website,\cite{devguide} using the same systems that support our user documentation.
+DM team members are encouraged to contribute improvements to the Developer Guide through GitHub.
+We use GitHub pull requests to get feedback on contributions and provide approval for changes to controlled pages such as coding style guides.
 
 \subsubsection{User documentation}
+\label{sec:user_docs}
 
-How user documentation is different than project documentation
+User documentation describes what is built, and most importantly, how to operate it.
+Thus we consider user documentation to be a deliverable product of the LSST construction project, on par with the software itself.
 
-Examples
+At the time of this publication, most DM effort towards user documentation have gone into the LSST Science Pipelines product\cite{pipelines-guide} and user guides for internal tooling.
+The LSST Science Platform is the second major documentation project.
+DM will also lay the groundwork for documentation of both LSST's data releases and prompt products.
 
-* Developer.lsst.io (internal ‘user documentation’)
-
-* Pipelines.lsst.io (example of user documentation for a product)
+We begin a new user documentation project by studying the nature of the product user needs.
+Then we work towards an information architecture plan that maps out topics in the user documentation project.
+As described by \citenum{Baker:2013}, topics are self-contained (though highly interlinked) articles that conform to a type.
+The general categories of topic types are concept guides, tutorials, how-to guides, and references.\cite{Procida:2017}
+This exercise not only allows us to systematically map the content needed to document a project but also understand the infrastructure needed to support each topic type (such as the tools needed to generate an API reference, or the tools needed to deliver and test a tutorial).
+The Science Pipelines Documentation Design\cite{DMTN-030} technical note is our living design for the LSST Science Pipelines user documentation.
