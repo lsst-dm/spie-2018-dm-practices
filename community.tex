@@ -1,3 +1,22 @@
 \subsection{Community forum}
+\label{sec:forum}
 
-Description of purpose and usage.
+Data Management operates the LSST Community forum,\footnote{\url{https://community.lsst.org}} which is open to the public.
+Although Slack carries the bulk of our team communication because it is fast and team-focused, the Community forum fills an important communications niche by having the opposite qualities.
+The forum encourages longer, thoughtful posts that lead to slower-paced conversations.
+These slower-paced conversations tend to be more accessible for those who cannot work synchronously the DM team because of factors like time zones or other obligations.
+Much of DM's own use of the forum, therefore tends to be intentionally public facing.
+For example, we regularly post small announcements of new features in the LSST software.
+We also host a support category to crowd-source help for astronomers who are using LSST software in their own investigations.
+To reach the LSST user community who are more interested in planning for LSST's data releases than using our software, we host categories for science and data discussions.
+For example, the DM System Science Team answers questions from the science community about LSST's planned data products.
+
+To implement the forum, we chose the open source Discourse\footnote{\url{https://discourse.org}} platform because of its modern architecture and vibrant open source community.
+Discourse is designed around a user trust system that largely eliminates the need for moderation (though the manual moderation tools are also excellent).
+On the whole, Discourse is a low-maintenance system for DM to deploy and operate.
+
+Prior to Discourse, we used mailing lists for a similar purpose.
+The problem with mailing lists, though, is that their archives are largely undiscoverable, and their conversations are harder to link to.
+Many DM team members initially favored retaining mailing lists because of the familiar workflow.
+To accommodate those needs, we creating tooling to forward conversations from the Community forum to the old mailing lists as we deprecated them.
+We continue to use that forwarding infrastructure, though Discourse's native email notification system is largely sufficient for newer users.
