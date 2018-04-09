@@ -84,5 +84,5 @@ Additionally, we have fixed timing and computational performance requirements an
 It is important for us to know quickly if an algorithm suddenly gets worse during code development.
 We have developed a set of Key Performance Metrics that we calculate on a weekly basis using precursor data from instruments on CFHT and Subaru.
 These metrics are logged with the SQuaSH system\cite{SQR-009} to enable scientists to examine trends and look for anomalies, and to allow developers to test their development branches to ensure that there aren't unexpected regressions in algorithmic performance.
-One complication with this approach is that the performance depends critically on the quality of our test dataset and as we approach commissioning we need a set of test data that allow us to be confident that the algorithms are suitable for LSST.
-Another issue we find, is that sometimes an improvement in the source detection phase can change the source count in unexpected ways and that can shift the result when the final catalog is analyzed even if there has been no change to the code that calculates the metric.
+We have found that tracking metrics is not quite enough because of complex interplay between datasets and algorithms.
+Care must be taken to evaluate the metrics with knowledge of the context.
