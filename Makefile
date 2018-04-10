@@ -12,5 +12,8 @@ spie-2018:
 	(cd docker; make)
 
 spie-10707-10.pdf: *.tex spie-2018
-	docker run --rm -v `pwd`:/build -w /build spie-2018:latest sh -c 'make'
+	docker run --rm \
+		-v `pwd`:/build -w /build \
+		-u $(shell id -u):$(shell id -g) \
+		spie-2018:latest sh -c 'make'
 endif
