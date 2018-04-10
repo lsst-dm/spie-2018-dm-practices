@@ -1,9 +1,28 @@
 \subsection{EUPS}\label{sec:eups}
 
-Philosophy of eups
+Managing the dependencies of many separate packages all undergoing rapid change including changing APIs, is a hard problem.
+At LSST we use the Extended Unix Product System (EUPS)\cite{EUPS}.
+EUPS was initially developed for SDSS \{citation needed\} as UPS, and has evolved over time migrating from Perl to Python.
+The EUPS philosophy is to organize the hierarchy of components that are required to make a release of a complex software product.
+It does this by understanding the dependencies between packages and knowing which versions of those packages were built together.
+As products are built they are installed into a directory tree where each built product is isolated from other products and all built versions of a product are available.
+A database, currently consisting of files using a bespoke file format, knows which version of a product should be used with specific versions of other products such that a coherent environment can be presented to the user.
+When a user requests that a particular product be ``set up'', EUPS sets environment variables in the current shell for every product that is required.
+Each product can specify which environment variables are relevant (for example \texttt{LD\_LIBRARY\_PATH}, \texttt{PATH}, \texttt{PYTHONPATH}) in a ``table'' file which is also used to declare optional and required dependencies.
+For each product that is being set up, EUPS adjusts the environment and prepends or appends to any previous value as requested.
 
-Implementation overview.
+A common use case is to set up a base environment and override versions of specific packages in order to debug some regression or to develop a new feature.
+EUPS excels at this use case since it is optmized for mixing and matching collections of products that have differing dependencies and ensuring that exactly the correct set are being tested.
+One downside to such a powerful system is that for many users they do not need to be able to mix and match versions and are happy to use whatever happens to be the most recent release of the software collection.
+For these users the EUPS user interface is far too complex and opaque and is much harder to understand than setting up a Python virtual environment and installing the relevant packages.
 
-How we use EUPS.
+The reliance on environment variables has caused some issues on modern macOS installations because of System Integrity Protection (SIP).\cite{DMTN-001}
+SIP strips \texttt{DYLD\_LIBRARY\_PATH} from any subprocesses that are launched from a protected binary.
+Protected binaries include those in \texttt{/usr/bin} such that shell scripts we run have no idea how where to find LSST shared libraries.
+To overcome this problem we define a special environment variable, \texttt{LSST\_LIBRARY\_PATH}, defined to include everything that would be set in \texttt{DYLD\_LIBRARY\_PATH}, that will not be stripped by SIP and can therefore be available to shell scripts and build systems.
+This technique is not ideal but does allow us to continue to use macOS.
+There is a worry that Apple are deprecating \texttt{DYLD\_LIBRARY\_PATH} and for that reason we are considering the use of link farms mapping the dependencies into a single temporary directory, and using \texttt{@rpath} to locate the libraries.
+This is messy given that the file system will have to be modified every time a product is set up, and it is not clear how to remove the soft links when a product is no longer needed.
 
-Eupspkg.
+In addition to managing the environment and tracking of installed packages, EUPS also supports the remote installation of source and binary packages from an EUPS server.
+To support different build systems the bundled \texttt{eupspkg} scripts provide a general system for building packages, supporting customization through a shell script that can be included with each package.
