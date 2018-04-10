@@ -1,6 +1,6 @@
 DOCKER := $(shell command -v docker 2> /dev/null)
 
-.PHONY:
+.PHONY: all
 all: spie-10707-10.pdf
 
 ifndef DOCKER
