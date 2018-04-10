@@ -29,5 +29,17 @@ matrix:
         [[ ${#CHECK[@]} -eq 0 ]] && exit
         docker run -ti -v $(pwd):$(pwd) -w $(pwd) \
           mivok/markdownlint:0.4.0 "${CHECK[@]}"
+    - env: TEST=hadolint
+      services:
+        - docker
+      script: |
+        set -e
+        shopt -s globstar nullglob
+        CHECK=( **/Dockerfile )
+        [[ ${#CHECK[@]} -eq 0 ]] && exit
+        for f in "${CHECK[@]}"; do
+          docker run -ti -v$(pwd):$(pwd) -w $(pwd) \
+            hadolint/hadolint hadolint "$f"
+        done
 notifications:
   email: false
