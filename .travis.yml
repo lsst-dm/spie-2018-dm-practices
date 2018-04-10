@@ -19,5 +19,15 @@ matrix:
             make --dry-run --warn-undefined-variables
           )
         done
+    - env: TEST=markdownlint
+      services:
+        - docker
+      script: |
+        set -e
+        shopt -s globstar nullglob
+        CHECK=( **/*.md )
+        [[ ${#CHECK[@]} -eq 0 ]] && exit
+        docker run -ti -v $(pwd):$(pwd) -w $(pwd) \
+          mivok/markdownlint:0.4.0 "${CHECK[@]}"
 notifications:
   email: false
