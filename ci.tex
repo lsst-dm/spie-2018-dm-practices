@@ -1,5 +1,75 @@
 \section{Continuous Integration}
 
-Jenkins.\label{sec:jenkins}
+\subsection{Jenkins}
+\label{sec:jenkins}
+
+\subsubsection{Why Jenkins?}
+
+The initial ``Continuous Integration'' system used for pre-merge testing of
+science pipeline code was buildbotFOOTNOTE:URL-https://buildbot.net/.  While it
+was able to accomplish the basic task of building branches from a git repo,
+there were a number of drawbacks.
+% \footnote{WRT the state of buildbot in 2014, the project appears to have made some improvements since that time}
+A few of the issues were: the UI was spartan and difficult to navigate, no
+integration with 3rd party authentication systems requiring manual management
+of user accounts, bare-bones ``out of the box'' functionality without a useful
+selection of publicly available plugins, and DM internal concern as to the long
+term viability as there appeared be relatively few public/open source users
+relative to competing CI/CD systems.
+
+% should this be broken into a \item list?
+After evaluating several potential CI/CD systems as a replacement,
+JenkinsFOOTNOTE:URL-https://jenkins.io/ was selected for numerous reasons,
+including: an open source core, it could be self hosted (the wall-clock build
+time and memory requirements exceeded the limits of many of the commercial
+hosted CI options, at that time), it offered an improved UI over buildbot,
+there was a pre-existing plugin to use github
+oauthFOOTNOTE:URL-https://plugins.jenkins.io/github-oauth, a healthy extension
+ecosystem with many useful plugins, apparent popularity with self-hosted
+open source projects, and an active core project.
+
+\subsubsection{Configuration + Deployment}
+
+The Jenkins core and various plugins need to be version managed and configured.
+Although there is currently a major effort underway to add native
+``configuration by
+code''FOOTNOTE:URL-https://github.com/jenkinsci/configuration-as-code-plugin to
+the jenkins core, this is not yet considered production ready and did not exist
+at the time DM was transitioning away from buildbot.
+
+PuppetFOOTNOTE:URL-https://puppet.com/ was selected as a configuration
+management tool as, at that time, it had the most sophisticated jenkins
+management abilities among the CM tools surveyed via the
+\texttt{puppet-jenkins}FOOTNOTE:URL-https://github.com/voxpupuli/puppet-jenkins
+module.  Non-trivial improvements have been contributed by DM staff to this
+module
+FOOTNOTE:URL-https://puppet.com/presentations/puppet-vs-jenkins-tale-types-and-providers
+in order to make it more suitable for managing a jenkins deployment.
+
+Configuration of Jenkins jobs is handled via the
+\texttt{job-dsl}FOOTNOTE:URL-https://plugins.jenkins.io/job-dsl plugin.  This
+enables a \texttt{groovy}FOOTNOTE:url-http://www.groovy-lang.org/ based DSL and a special job type that
+will ``seed'' jenkins jobs from a git repository that contains \texttt{job-dsl}
+script(s).  The seed job itself is maintained as \texttt{xml} that is manually
+installed by puppet.  The result is that all jobs configuration is managed via
+a SCM and no manual configuration via the jenkins UI is required to
+add/delete/change or stand up a testing environment.
+
+% should any of the jenkins related repos be mentioned?
+% the production jenkins deployment is not publically accessible
+
+% add discussion of jenkins pipeline
+
+\subsubsection{Evolving Usage}
+
+Over time, usage of jenkins has evolved from being used solely for pre-merge
+``CI'' testing to automation of number of common tasks.  Among various sundry
+tasks, it is being used to build docker images, update local software mirrors,
+schedule regular backup.  Perhaps most notably, it is being used to a drive a
+`Continuous Deployment'' workflow for completely automated nightly and weekly
+release/publication of science pipelines codes(\ref{sec:scipipe-deploy}).
+
+\subsection{Travis-CI}
+\label{sec:travis-ci}
 
 Travis for simpler items (yaml file validation, flake8 tests)
