@@ -34,10 +34,8 @@ Note also  tags for the weekly releases and a recent release candidate.
 \end{figure}
 
 LSST software development is based on the shared repository model: work is done on branches of a single repository rather than on user forks.
-Development work is associated with a Jira ticket (\S\ref{sec:jira_ticket}), and keeping all work in a shared repository makes it easier to link code changes to their corresponding Jira tickets.
+Development work is associated with a Jira ticket (\S\ref{sec:jira_ticket}) in a feature branch named after the ticket, and keeping all work in a shared repository makes it easier to link code changes to their corresponding Jira tickets.
 This in turn makes it easier to audit work in terms of Jira tickets.
-
-All work associated with a specific Jira ticket is done on a feature branch named after that ticket.
 Developers must test their branch as part of the full data management system (\S\ref{sec:jenkins}) before the code is considered ready to review or merge.
 GitHub pull requests from the ticket branch to \texttt{master} are used for code review, but not to merge the code.
 Instead, feature branches are merged by first rebasing them onto the latest version of \texttt{master}, then forcing a merge without Git's fast-forward optimization (Fig.~\ref{fig:commitlog}).
@@ -55,4 +53,6 @@ While it worked well most of the time, there were occasional cases where a devel
 Therefore, we began using GitHub's branch protection feature to block both direct commits to \texttt{master} and merges of unrebased ticket branches.
 Branch protection is transparent to developers so long as they follow the workflow, so this improvement catches errors without altering the overall development process.
 
+
+%% WOM consider removing
 \input{other-workflows}

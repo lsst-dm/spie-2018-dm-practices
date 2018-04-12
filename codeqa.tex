@@ -14,17 +14,13 @@ In April 2018, the Qserv database software\cite{2011Wang:2011:QDS:2063348.206336
 % C++                             859          21507          29472         108609
 % C/C++ Header                    555          14937          46781          42296
 
-Code quality is hard to define and notoriously difficult to tackle when hundreds of thousands of lines of code are to be supported.
-In DM we tackle this by employing a number of different strategies.
-
-\begin{itemize}
-  \item Defining a coding standard\cite{devguide} and enforcing it with tooling where possible.
-  \item Ensuring that warnings from static analyzers are dealt with and where possible insisting that builds fail if, for example, a \texttt{flake8} warning is issued.
-  \item Forcing a specific C++ standard and configuring the C++ compiler to fail if a standard is violated.
-  \item Running unit tests for every commit, and generating code coverage and test statistics.
-  \item Issuing verbose warnings, including Python's \texttt{DeprecationWarning}, to warn us of any possible future issues.
-  \item Running regular integration tests and tracking the algorithmic results to ensure that we are improving with time.
-\end{itemize}
+\noindent Code quality is hard to define and notoriously difficult to tackle when hundreds of thousands of lines of code are to be supported.
+In DM we have a
+   coding standard\cite{devguide} enforced with tooling where possible. We ensure  that warnings from static analyzers are dealt with and where possible have the build fail e.g. if a \texttt{flake8} warning is issued.
+Enforce a specific C++ standard by configuring the C++ compiler to fail it is violated.
+We run unit tests for every commit, and generate code coverage and test statistics.
+We issue verbose warnings, including Python's \texttt{DeprecationWarning}, to warn us of any possible future issues.
+We run regular integration tests and tracking the algorithmic results to ensure that we are improving with time.
 
 \subsubsection{Coding Standards}
 \label{sec:coding-standards}
