@@ -18,7 +18,7 @@ For these users the EUPS user interface is far too complex and opaque and is muc
 
 The reliance on environment variables has caused some issues on modern macOS installations because of System Integrity Protection (SIP).\cite{DMTN-001}
 SIP strips \texttt{DYLD\_LIBRARY\_PATH} from any subprocesses that are launched from a protected binary.
-Protected binaries include those in \texttt{/usr/bin} such that shell scripts we run have no idea how where to find LSST shared libraries.
+Protected binaries include those in \texttt{/usr/bin} such that shell scripts we run have no idea where to find LSST shared libraries.
 To overcome this problem we define a special environment variable, \texttt{LSST\_LIBRARY\_PATH}, defined to include everything that would be set in \texttt{DYLD\_LIBRARY\_PATH}, that will not be stripped by SIP and can therefore be available to shell scripts and build systems.
 This technique is not ideal but does allow us to continue to use macOS.
 There is a worry that Apple are deprecating \texttt{DYLD\_LIBRARY\_PATH} and for that reason we are considering the use of link farms mapping the dependencies into a single temporary directory, and using \texttt{@rpath} to locate the libraries.
