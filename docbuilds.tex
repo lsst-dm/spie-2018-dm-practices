@@ -4,7 +4,7 @@
 Besides creating documentation content, we invest in infrastructure that helps us more effectively create and serve that documentation.
 Overall, we use a ``docs-like-code'' approach.\cite{Gentle:2017}
 This means, broadly, that we write documentation like we write code by using plain text source formats, Git and GitHub for version control and collaboration, and continuous integration servers for both validating the content and deploying it to web servers.
-For a code development organization like ours, this has several advantages.
+%For a code development organization like ours, this has several advantages.
 By using the same development processes for both code and documentation, our developers need minimal additional training and documentation.
 In the particular case of software user documentation, the docs-like-code approach ensures that documentation is versioned with the software since both reside in the same Git repository.
 The docs-like-code approach is also convenient for building custom tooling to automate documentation processes and integrate with the code base.
@@ -12,23 +12,21 @@ The docs-like-code approach is also convenient for building custom tooling to au
 \subsubsection{Versioned documentation delivery}
 \label{sec:ltd}
 
-A critical component of our docs-like-code system is the documentation hosting service, which we call \textit{LSST the Docs}\cite{SQR-006} in reference to the popular service Read the Docs,\footnote{\url{https://readthedocs.org}}.
+A critical component of our docs-like-code system is the documentation hosting service, which we call \textit{LSST the Docs}\cite{SQR-006}\footnote{In reference to the popular \url{https://readthedocs.org}}.
 We designed \textit{LSST the Docs} around three goals: reliable scalability, support for versioned documentation, and flexible integration with continuous delivery workflows.
-
 LSST documentation is statically rendered at build time, stored in the cloud (Amazon S3) and delivered via a content distribution network (Fastly).
 This architecture is arbitrarily scalable, and avoids the need to maintain servers and applications to dynamically render HTML.
 The static documentation approach also lends itself to \emph{versioned} documentation.
 \textit{LSST the Docs} uses URL path prefixes to deliver documentation for different versions of the same project.
-In fact, we often deploy draft versions of documentation based on Git branches to support code reviews.
+We often deploy draft versions of documentation based on Git branches to support code reviews.
 
-Finally, \textit{LSST the Docs}'s modular architecture make it easy to integrate into many kinds of software continuous integration pipelines.
+Finally, \textit{LSST the Docs}'s modular architecture makes it easy to integrate into continuous integration pipelines.
 Generally all documentation projects hosted on \textit{LSST the Docs} have some form of continuous integration server.
 Our LaTeX projects and technical notes are built with Travis CI, triggered automatically by GitHub activity.
 Documentation for the larger, and more complex, LSST Stack software is built on a Jenkins CI server.
 In each case, the continuous integration pipeline uses a client to upload built documentation to \textit{LSST the Docs}.
 \textit{LSST the Docs} does not provide is own documentation build service.
 This is in distinct contrast to other static documentation hosting services, like Read the Docs, and allows the necessary flexibility to let software and documentation projects define their own build environments.
-
 In the next sections we describe the build systems for specific types of DM documentation that are deployed with \textit{LSST the Docs}.
 
 \subsubsection{LaTeX tooling for project documentation}
@@ -42,11 +40,10 @@ Every DM LaTeX document is expected to upstream all of its citations into these 
 We also maintain a common repository of images, though in a separate Git repository.
 Our LaTeX documents typically incorporate these images as a Git submodule.
 
-We practice continuous integration and delivery of our LaTeX documents.
-We write LaTeX documents on GitHub (each distinct document is a distinct Git repository).
+We write LaTeX documents on GitHub (each document in its own Git repository).
 When changes are pushed to a branch on GitHub, Travis CI builds the document.
-Within the Travis CI environment, we compile the LaTeX document inside a Docker container that includes Texlive and lsst-texmf.
-We've found that this containerized approach generally improves build times.
+%Within the Travis CI environment, we compile the LaTeX document inside a Docker container that includes Texlive and lsst-texmf.
+%We've found that this containerized approach generally improves build times.
 After building the document, the Travis CI job uploads the versioned document (corresponding to a Git branch or tag) to \textit{LSST the Docs}.
 Since LaTeX documents compile to PDF, we create HTML landing pages that wrap the PDF and provide metadata to readers.\footnote{\url{https://github.com/lsst-sqre/lander}}
 
@@ -60,6 +57,7 @@ LSST archives baselined documents, as well as intermediate drafts, in our Xerox 
 
 For user guides, such as DM's Developer Guide and the LSST Science Pipelines documentation, we use Sphinx to generate static websites that we deploy to \textit{LSST the Docs}.
 Sphinx is ideal because it integrates well with our Python codebase.
+%%WOM consider reomving this line
 For example, docstrings within our Python code are written in the Numpydoc\cite{numpydoc} format, which is incorporated in our codebase with the Numpydoc toolchain that is wrapped with extensions from the Astropy\cite{2018arXiv180102634T} project.
 Beyond Numpydoc we take further advantage of extensions developed by Sphinx's open source community.
 For example, the breathe extension pulls data about our C++ APIs from Doxygen, allowing us to generate C++ API references with Sphinx.
