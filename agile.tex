@@ -19,12 +19,11 @@ The Project assumes that a full-time individual works for a total of
 1,800 hours per year: this figure is \emph{after} all vacations, sick
 leave, etc are taken into account. Staff appointed to ``developer''
 positions are expected to devote this effort directly to LSST.
-
 Appointment as a \emph{scientist} includes a 20\% personal research time
 allowance. That is, scientists are expected to devote 1,440 hours per
 year to LSST, and the remainder of their time to personal research.
 
-Our base assumption is that 30\% of an individual's LSST time (i.e., 540 hours/year for a developer, 432 hours/year for a scientist) are devoted to overhead for regular meetings\footnote{``Meetings'' include, for example, scheduled weekly team meetings, stand-ups, etc.; major conferences or project meetings involving preparation, travel time, etc., should be scheduled in advance and allocated Story Points}, ad-hoc discussions and other interruptions.
+\noindent Our base assumption is that 30\% of an individual's LSST time (i.e., 540 hours/year for a developer, 432 hours/year for a scientist) are devoted to overhead for regular meetings\footnote{``Meetings'' include, for example, scheduled weekly team meetings, stand-ups, etc.; major conferences or project meetings involving preparation, travel time, etc., should be scheduled in advance and allocated Story Points}, ad-hoc discussions and other interruptions.
 This is similar to the standard \emph{Agile} discount, however in the earned value world that must be accounted for and it is considered Level of Effort.
 
 
@@ -32,7 +31,6 @@ This is similar to the standard \emph{Agile} discount, however in the earned val
 \label{sec:long-term-plan}
 
 The plan for the duration of construction is embodied in:
-
 \begin{enumerate}
 \item
   A series of \emph{planning packages}, which describe major pieces of
@@ -47,24 +45,22 @@ The plan for the duration of construction is embodied in:
   may contain other milestones describing intermediate results.
 \end{enumerate}
 
-Planning packages are defined at the fourth level of the Work Breakdown Structure (WBS).
-
+\noindent Planning packages are defined at the fourth level of the Work Breakdown Structure (WBS).
 All WBS elements are related to the set of Data Management Products embodied in the System Design \cite{LDM-148}.
 Each product has a \emph{product owner} to guide the agile development, this is frequently one of the Data Management Scientists.
-
 During the planning of each 6 month cycle, effort is drawn from the budget allocated to the planning packages to generate the cycle plan, described in terms of epics in Jira.
 Each epic itself has a particular budget with story points being associated with a specific WBS.
 This budget is subtracted from that available in the planning package at the point when the epic is defined.
 Team members then add specific stories to these epics.
 The Jira system is synchronized with the Primavera project management tool every three months using in-house tools.
 
-In order for the DM system to reach its science goals, new algorithmic or engineering approaches must sometimes be researched.
+\noindent In order for the DM system to reach its science goals, new algorithmic or engineering approaches must sometimes be researched.
 It is appropriate to budget time for this research work in planning packages and they result in epics of defined length (rather than specific  deliverable).
 Areas where successful delivery of the DM system is dependent on speculative research are a source of risk: where possible, the plan  also provides for a fallback option to be taken when research objectives are not achieved.
 This may also lead to an entry in the risk register.\cite{2016SPIE.9911E..0NK}
 
 
-Some work is \emph{emergent}: we can predict in advance that it will be necessary, but we cannot
+\noindent Some work is \emph{emergent}: we can predict in advance that it will be necessary, but we cannot
 predict exactly what form it will take. The typical example of this is fixing bugs: we can reasonably
 assume that bugs will be discovered in the codebase and will need to be addressed,
 but we cannot predict in advance what those bugs will be.
@@ -75,13 +71,9 @@ when necessary during the course of a cycle.
 The broad plan (to 2022) is laid out in planning packages.
 For a  given  cycle (six months)   more detail is put in the form of epics which  are shared across the teams in a face to face meeting a little ahead of the start of cycle.  The team then start to populate the epics with stories (both of which are Jira tickets)  which are at an appropriate level for day to day planning.
 Within the cycle we follow monthly sprints with the usual agile steps:
-\begin{enumerate}
-\item \textbf{Preparation:} Stories for the sprint are chosen and distributed to team members according to available points. This is usually a local team meeting.
-\item \textbf{Execution:} As the cycle progresses daily standups are used to catch blockers and clarify stories. At the higher level there are two T/CAM standups each week on Tuesday and Friday to raise issues across team boundaries.
-\item \textbf{Review:} At cycle end a retrospective should be conducted, although these are not yet formally part of our process.
-\end{enumerate}
+\textbf{Preparation:} Stories for the sprint are chosen and distributed to team members according to available points. This is usually a local team meeting. \textbf{Execution:} As the cycle progresses daily standups are used to catch blockers and clarify stories. At the higher level there are two T/CAM standups each week on Tuesday and Friday to raise issues across team boundaries. \textbf{Review:} At cycle end a retrospective should be conducted, although these are not yet formally part of our process.
 
-We use Jira's
+\noindent We use Jira's
 \href{https://www.atlassian.com/software/jira/agile}{Agile} capabilities
 to manage our sprints. Each technical manager is responsible for
 defining and maintaining their own agile board. The board may be
@@ -92,7 +84,7 @@ style work as appropriate.
 
 \subsection{Reporting}
 DM produces a mandatory written monthly report for NSF/DOE in which each team reports on progress and issues. A new addition to this report since last year is to clearly track the state of milestones which have been met or delayed.
-As described in Ref.~\citenum{2016SPIE.9911E..0NK}, the Primavera system outputs standard project metrics on variance and budget.
-Though this is reasonable  for reporting hardware based activities it does not report well on Agile progress unless there are well defined deliverables.
+The Primavera \cite{2016SPIE.9911E..0NK} system outputs standard project metrics on variance and budget which is
+reasonable  for reporting hardware based activities it does track  Agile progress well  unless there are well defined deliverables.
 In 2017 we laid out a set of test driven milestones to show progress in Data Management.\cite{LDM-503}
 These milestones are completed by execution of tests laid out in a test specification tying them to requirements, resulting in a test report.
