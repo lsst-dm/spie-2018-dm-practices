@@ -9,21 +9,20 @@ We use EUPS to specify the dependencies between packages and the \texttt{ups} di
 There are four types of software that are required to be handled in order to install the LSST DM Science Pipelines software packages.
 The first type are the system prerequisites that we need to have available on the system: this can include compilers, and build support tools such as \texttt{cmake}.
 The second type is Python and the set of standard Python packages.
-Although the software should be able to be built with any valid Python, for LSST development and testing we always install our own Anaconda and install a set of Python prerequisites including \texttt{numpy}, \texttt{matplotlib}, and \texttt{astropy}\cite{2018arXiv180102634T}.
-
+Theoretically the software should  build with any valid Python, but for LSST development and testing we always install our own Anaconda and
+ a set of Python prerequisites including \texttt{numpy}, \texttt{matplotlib}, and \texttt{astropy}\cite{2018arXiv180102634T}.
 The third type of packages are EUPS ``tar and patch'' packages of third-party code.
+%%WOM Consider removing this next line
 These packages consist of a (compressed) tar file of the upstream distribution, an optional directory of patches to be applied after the source code has been extracted, and a \texttt{ups} directory containing a table file for dependency management along with a file named \texttt{eupspkg.cfg.sh} that provides instructions for overriding the default build and install behavior.
 The \texttt{eupspkg} command has \texttt{prep}, \texttt{config}, \texttt{build}, and \texttt{install} sub-commands for preparing the package, configuring it, building it, and installing it respectively, and by default knows how to build Python packages, and packages using autoconf, SCons, and make.
-This approach to thirdparty packages allows us to know what patches we have applied and has the benefit of giving us direct control over a specific version that we wish to build against.
+This approach to third party packages allows us to know what patches we have applied and has the benefit of giving us direct control over a specific version that we wish to build against.
 We also have the concept of ``stub'' packages, whose job it is to validate that a prerequisite Python package is installed and has a supported version.
 This also allows our own packages to explicitly require these packages be available for dependency tracking.
 
 In a few cases, where the third-party software is available on GitHub and we are closely affiliated with upstream, we fork the code repository and use a branch named \texttt{lsst-dev} for local modifications such as adding EUPS support.
 For Science Pipelines we use this technique for the AST library\cite{2016A&C....15...33B} for handling coordinate transformations.
-
 The LSST EUPS-based software packages themselves use a standard layout with SCons\cite{2005Scons1377085} being used to build each package.
 We have written extensions to SCons to support our use of C++ with Pybind11 wrappers, and Python code tested with pytest.
-
 Support packages from the Science Quality and Reliability Engineering group, use industry standard packaging systems based on the language in the package, with Python packages being distributed through PyPI and dependencies managed in the standard Python manner.
 
 \subsubsection{Building from git}

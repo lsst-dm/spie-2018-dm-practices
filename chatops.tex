@@ -1,5 +1,6 @@
 \subsubsection{Chat Ops}
 \label{sec:chatops}
+%WOM Should this be title SQLBOT ? the tile does not mean much
 
 DM-SQuaRE is using a Slack chatbot called ``sqrbot'' to make some tasks
 easier. Currently it performs a range of functions, from returning the
@@ -18,7 +19,7 @@ the information (or creation of a technote skeleton, etc.) and get
 immediate gratification without needing to task-switch or interrupt
 a co-worker.
 
-The basic architecture is simple: sqrbot is simply a collection of hubot
+The basic architecture is simple: sqrbot is a collection of hubot
 scripts running as a Slack bot, which in turn drive microservices,
 written in Python and implemented using the Flask framework.  These
 microservices have an API that responds with JSON, so the job of sqrbot
