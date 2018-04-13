@@ -1,7 +1,7 @@
 \subsection{Deploying Science Pipelines Releases}
 \label{sec:scipipe-deploy}
 
-DM has 3 primary types of ``release'', each with a different cadence, for
+DM has three types of ``release'', each with a different cadence, for
 science pipeline related products: \texttt{daily} (also referred to as a \texttt{nightly}), \texttt{weekly}, and \texttt{cycle} or ``major'' release, which have historically occurred once per DM planning cycle (\S\ref{sec:agile}).
 A ``major'' release includes a human edited ``changelog'', updated installation
 instructions, usage notes, and a formal data processing characterization report,
@@ -9,9 +9,7 @@ and thus can not be completely machine automated.  However, the
 mechanical steps of tagging, building, and publishing software does share
 jenkins pipeline code with the automatically triggered \texttt{daily} and
 \texttt{weekly} releases.
-
-The cadences of the \texttt{daily} and \texttt{weekly} releases are self
-explanatory and are fully automated. They are triggered by Jenkins on a fixed
+The \texttt{daily} and \texttt{weekly} are fully automated and triggered by Jenkins on a fixed
 schedule.
 
 \subsubsection{The ``Weekly Release'' pipeline}
@@ -23,10 +21,10 @@ principally differ in that a ``nightly'' release does not tag git
 repositories.  The rationale being that a ``nightly'' is used both for
 developer convenience and as a ``canary'' to ensure that code changes have not
 broken the release workflow, but they are not a product that needs to be
-reproducible/rebuildable from source, infinitely far into the future.  Both
-release types share a library of common Jenkins pipeline methods and are
-planned to be merged in the near future into a single pipeline script that uses
-only separate external configuration per release type.
+reproducible/rebuildable from source.
+Both release types share a library of common Jenkins pipeline methods and
+will be merged in the near future into a single pipeline script that uses
+a separate external configuration per release type.
 
 \begin{figure}[t]
 \begin{center}
@@ -36,15 +34,13 @@ only separate external configuration per release type.
 \end{center}
 \end{figure}
 
-\paragraph{``Touchstone'' build \& publish doxygen docs.}
-
+\noindent {\bf ``Touchstone'' build \& publish doxygen docs.}
 The first step in producing a release is to make a build from the
 \texttt{master} branch of the source git repositories on the ``reference''
 platform, which is presently \texttt{CentOS~7}.  If the per product unit tests
 and a ``quick'' integration test succeed, a cross-package HTML
 formatted documentation set is built using \texttt{doxygen}\cite{doxygen} and is published to
 a service that developers may access with a web-browser.
-
 A ``manifest'' listing the \texttt{eups} products that were part of the build,
 git repository SHA1s for those products, and build dependencies are recorded by
 \texttt{lsst\_build} at this stage in a git repository structure which the tool
@@ -52,9 +48,8 @@ refers to as ``versiondb''.  The canonical ``versiondb'' instance for science
 pipeline releases is published on GitHub at
 \href{https://github.com/lsst/versiondb}{\texttt{lsst/versiondb}}.
 
-\paragraph{Publish eups source packages.}
+\noindent {\bf Publish eups source packages.}
 \label{sec:scipipe-deploy-src}
-
 \texttt{eups}\ref{sec:eups} ``source packages'' or \texttt{eupspkg} are
 produced from the installation tree resulting from the prior step.  Note that
 although \texttt{eupspkg} are source based, and do not contain binary objects,
@@ -63,42 +58,37 @@ In addition to \texttt{eupspkg}, a \texttt{eups} ``distrib tag'' is also
 published, which is used to refer to a specific set of packages at fixed
 versions.  Examples of \texttt{eups} tags are: \texttt{w\_2018\_14}, \texttt{d\_2018\_04\_10}.
 
-The \texttt{eupspkg} are pushed to an AWS S3 ``bucket'', which is used as the
+\noindent The \texttt{eupspkg} are pushed to an AWS S3 ``bucket'', which is used as the
 canonical repository for both source and binary \texttt{eups} packages.  The S3
 bucket is not publicly accessible as \texttt{eups} only supports remote
 package repositories over \texttt{http[s]} that have HTML ``index
 pages'' in the traditional format produced by the \texttt{apache}
 webserver.  To accommodate this
 requirement, the S3 bucket is periodically replicated to a simple
-service that
-deploys on kubernetes\footnote{\url{https://kubernetes.io/}} cluster which consists
-of \texttt{TLS} termination, a reverse proxied Apache instance, a persistent
-storage volume, and a replication script.  The publicly accessible URL for
-source packages is presently \url{https://eups.lsst.codes/stack/src/}.
+service that deploys on a Kubernetes cluster providing \url{https://eups.lsst.codes/stack/src/}.
 
-\paragraph{Tag git repos.}
-
+\noindent{\bf Tag git repos.}
 A script contained in the
-\href{https://github.com/lsst-sqre/sqre-codekit}{\texttt{sqre-codekit}} Python package
+\href{https://github.com/lsst-sqre/sqre-codekit}{\texttt{sqre-codekit}} package
 uses the initial build ``manifest'' to apply an annotated git tag to all
 repositories from which an \texttt{eups} product was pulled as part of the
 build along with a number of ancillary git repositories that contain build
 scripts, documentation, and other items that would be needed to exactly reproduce the
 release.
+%%WOM above could be shortened
 
-\paragraph{Build/publish eups binary ``tarball'' packages.}
-
+\noindent{\bf Build/publish eups binary ``tarball'' packages.}
 This is perhaps the most complex stage in a release.  Multiple builds/publishes
 are run in parallel.  As of the \texttt{15.0} (\texttt{eups} distrib tag
 \texttt{v15\_0}) release, the build matrix is: Python 2 and 3 on CentOS~6, CentOS~7, and macOS 10.9.
 
-Every build is started from scratch and bootstraps a development/installation environment using the \href{https://github.com/lsst/lsst/blob/master/scripts/newinstall.sh}{\texttt{new\-install.sh}}\cite{pipelines-guide} script, just as an ``end user'' would when building/installing science pipeline software. Eg.
+\noindent Every build is started from scratch and bootstraps a development/installation environment using the \href{https://github.com/lsst/lsst/blob/master/scripts/newinstall.sh}{\texttt{new\-install.sh}}\cite{pipelines-guide} script, just as an ``end user'' would when building/installing science pipeline software e.g.
 
 \begin{verbatim}
 curl -sSL https://github.com/lsst/lsst/blob/master/scripts/newinstall.sh | bash -s -- -cb
 \end{verbatim}
 
-Then a \texttt{eups distrib install} is performed, also as an end-user would
+\noindent Then a \texttt{eups distrib install} is performed, also as an end-user would
 run.  This is followed by publishing \texttt{eups} ``distrib tarballs'' (binary
 package) to a local path.  \texttt{newinstall.sh} is again installed but into a
 new path.  The second, pristine, installation is pointed at the local publication
@@ -109,32 +99,32 @@ are no failures, the binary ``tarballs'' are then publicly published in a
 similar manner to the ``source'' \texttt{eupspkg} but using a different
 directory prefix to prevent source and binary packages from different
 environments from being intermixed.
+%%WOM above could be much shorter.. we install we check we done
 
-\paragraph{Build docker image.}
-
+\noindent {\bf Build docker image.}
 A \href{https://github.com/lsst-sqre/docker-tarballs}{Docker image} is
 constructed with the ``tarballs'' from the release pre-installed, which is
 published to Docker hub in the
 \href{https://hub.docker.com/r/lsstsqre/centos/}{\texttt{lsstsqre/centos}} repository.
 
-The SCons-based build/installation (\S\ref{sec:buildsw}) that is used by all science pipelines software, installs
+\noindent The SCons-based build/installation (\S\ref{sec:buildsw}) that is used by all science pipelines software, installs
 virtually all files from the build tree. This includes \texttt{.o} files, unit
 test scripts, test data, and \texttt{doxygen} HTML and XML output. In
 addition, none of the executable binaries have been \texttt{strip(1)}d.  These
 excess materials, that are unlikely to be of interest to a end user or in a
-production system, would add approximately 6\,GiB to an uncompressed Docker image and
-would result in an overall size around 10\,GiB.  To avoid frustrating downstream
-consumers, the aforementioned items are stripped from the Docker layer resulting in an uncompressed image of less than 6~GiB.
+production system
+ %would add approximately 6\,GB to an uncompressed Docker image and
+%would result in an overall size around 10\,GB.  To avoid frustrating downstream
+%consumers, the aforementioned items
+and are stripped from the Docker layer resulting in an uncompressed image of less than 6~GB.
 
-\paragraph{Build jupyterlab docker image}
-
+\noindent{\bf Build jupyterlab docker image}
 The ``release'' docker image is used as the base (\texttt{FROM}) for the
-jupyterlabdemo base image (\S\ref{sec:jupyterlab}).  This, theoretically, results in there being both
+jupyterlabdemo base image (\S\ref{sec:jupyterlab}).  This results in both
 ``nightly'' and ``weekly'' builds becoming available in a Jupyterlab environment
 with relatively low latency.
 
-\paragraph{Process test data sets and collect metrics}
-
+\noindent{\bf Process test data sets and collect metrics}
 The ``release'' docker image is also used to run several test data sets using a
 package called
 \href{https://github.com/lsst/validate_drp/}{\texttt{validate\_drp}}.
@@ -142,8 +132,7 @@ Metrics are collected from the processing results and are shipped to a
 dashboard called ``\href{https://squash.lsst.codes/}{SQuaSH}''\cite{SQR-009}, which plots
 trends over time.
 
-\paragraph{Experimental documentation build \& publish}
-
+\noindent{\bf Experimental documentation build \& publish}
 Due to the ease of ``composition'' with Jenkins pipelines, it is relatively low
 cost to add additional pipeline stages on a temporary basis in order to test out
 new features.  Presently, this stage is ``tacked on'' to the regular release
