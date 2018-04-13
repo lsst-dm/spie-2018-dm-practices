@@ -1,30 +1,23 @@
 \section{Continuous Integration}
 
-\emph{Continuous Integration} (CI) and \emph{Continuous Deployment} (CD) are a critical component of a modern software system and modern astronomical observatory.\cite{2014arXiv1407.6463E}
+\emph{Continuous Integration} (CI) and \emph{Continuous Deployment} (CD) go hand in hand with Agile \S\ref{sec:agile} development  and  are  critical in the  modern astronomical observatory.\cite{2014arXiv1407.6463E}
 
 \subsection{Jenkins}
 \label{sec:jenkins}
 
-The initial CI system used for pre-merge testing of
-science pipeline code was \href{https://buildbot.net/}{Buildbot}.
-In 2014 it was able to accomplish the basic task of building branches from a git repo,
-but there were a number of drawbacks.
-For example, the UI was spartan and difficult to navigate, there was no
-integration with 3rd party authentication systems requiring manual management
-of user accounts, bare-bones ``out of the box'' functionality without a useful
-selection of publicly available plugins, and DM internal concern as to the long
-term viability of the product as there appeared be relatively few public/open source users
-relative to competing CI/CD systems.
-
+ The initial CI system used for pre-merge testing of science pipeline code in 2014  was \href{https://buildbot.net/}{Buildbot}.
 % should this be broken into a \item list? No. Not enough space.
 After evaluating several potential CI/CD systems as a replacement,
-\href{https://jenkins.io/}{Jenkins} was selected for numerous reasons, including:
-an open source core, it could be self hosted (the wall-clock build
-time and memory requirements exceeded the limits of many of the commercial
-hosted CI options, at that time), it offered an improved UI over Buildbot,
-there was a pre-existing plugin to use \href{https://plugins.jenkins.io/github-oauth}{GitHub OAuth},
-a healthy extension ecosystem with many useful plugins, apparent popularity with self-hosted
-open source projects, and an active core project.
+\href{https://jenkins.io/}{Jenkins} was selected for numerous reasons.
+e.g.  \href{https://plugins.jenkins.io/github-oauth}{GitHub OAuth} plugin,
+a healthy extension ecosystem and an active core project.
+
+Over time, usage of Jenkins has evolved from being used solely for pre-merge
+CI testing to automation of a number of common tasks.  Among various sundry
+tasks, it is being used to build Docker images, update local software mirrors, and
+schedule regular backups.  Perhaps most notably, it is being used to drive a
+CD workflow for completely automated nightly and weekly
+release/publication of science pipelines codes (\ref{sec:scipipe-deploy}).
 
 \subsubsection{Configuration \& Deployment}
 
@@ -51,14 +44,7 @@ add/delete/change or stand up a testing environment.
 
 % add discussion of jenkins pipeline
 
-\subsubsection{Evolving Usage}
 
-Over time, usage of Jenkins has evolved from being used solely for pre-merge
-CI testing to automation of a number of common tasks.  Among various sundry
-tasks, it is being used to build Docker images, update local software mirrors, and
-schedule regular backups.  Perhaps most notably, it is being used to drive a
-CD workflow for completely automated nightly and weekly
-release/publication of science pipelines codes (\ref{sec:scipipe-deploy}).
 
 \subsection{Travis-CI}
 \label{sec:travis-ci}
@@ -68,4 +54,4 @@ As described in \S\ref{sec:ltd} Travis is used for deployment of our documentati
 With our non-standard build system we can not use Travis for unit testing our branches in most of our software repositories.
 Instead, we use Travis for linting: we validate that important CI configuration files have the correct formatting, and we run the \texttt{flake8} and \texttt{shellcheck} tools on our code.
 These Travis checks allow us to enforce our code merging policies (\S\ref{sec:dev_workflow}) by requiring that branches are up to date before merges are allowed.
-GitHub only enables this if a Travis job is executed.
+%GitHub only enables this if a Travis job is executed.
