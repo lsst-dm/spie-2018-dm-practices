@@ -1,10 +1,12 @@
 \subsection{Case Study: Deploying releases to JupyterLab}
 \label{sec:jupyterlab}
 
-The LSST Stack is already built within the context of a CI framework
-that produces nightly and weekly builds.  One of the build artifacts of
-this process is a Docker container that includes the stack.  Since the
-JupyterLab environment is simply Kubernetes, we have appended a phase to
+As our exploration of JupyterLab as the interactive notebook component
+of the LSST Science Platform\cite{LSE-319} proceeds, we have realized the need for
+automated deployments of the lab environment.
+One of the build artifacts mentioned above is a Docker container that includes the stack.
+Since the
+JupyterLab environment is Kubernetes ready, we have appended a phase to
 the stack builds that starts with the Docker stack container and adds
 the JupyterLab server and other Python modules we need, as well as the
 user provisioning machinery and Lab startup scripts.  Thus, with each
@@ -16,10 +18,7 @@ of formats.  From this we can construct a menu of the most recent daily,
 weekly, and release builds, and present a choice of stack versions to
 the user at JupyterHub login time.
 
-As our exploration of JupyterLab as the interactive notebook component
-of the LSST Science Platform\cite{LSE-319} proceeds, we have realized the need for
-automated deployments of the lab environment, which is simply a
-Kubernetes cluster and namespace.  Automated deployment serves two
+\noindent Automated deployment serves two
 purposes: first, it makes it possible to immediately QA changes to the
 lab environment itself, since the deployment can become part of a CI
 process.  Second, it makes the process of standing up an environment for
@@ -36,5 +35,4 @@ Future improvements may include a move to Helm charts rather than raw
 kubernetes YAML, a rewrite so that deployment becomes a Terraform
 configuration rather than a python module, and/or integration of TLS
 certificate management into the tool.
-
-A more detailed description of the LSST JupyterLab environment can be found in Ref.~\citenum{AS18-AS110-10707-16}.
+ A more detailed description of the LSST JupyterLab environment can be found in Ref.~\citenum{AS18-AS110-10707-16}.

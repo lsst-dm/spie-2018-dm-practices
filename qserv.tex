@@ -7,7 +7,7 @@ center context rather than on individual developer machines.
 
 The various components of the Data Access Services are built within LSST CI (Jenkins) as Docker containers.
 Per general LSST practice, unit tests included in each module are executed as part of the build, and the build
-will be failed if these do not pass.  In addition, some parts of the service suite have coverage by small-
+will be fail if these do not pass.  In addition, some parts of the service suite have coverage by small-
 scale automated integration tests; these tests are run by Travis CI on each GitHub branch commit or pull
 request.  The automated integration tests launch a constellation of containers configured with test datasets,
 then make a series of service requests and evaluate received responses against known/expected results.
@@ -21,17 +21,3 @@ with datasets of increasing size, on a ramp toward the scale necessary to suppor
 Cluster deployments of the Data Access Services containers are done at present with a collection of ad-hoc
 administration scripts, but the project is working currently to replace these with Kubernetes tooling.
 
-The Data Access services have been incubated along with the rest of the LSST software stack, sharing common CI
-infrastructure, software package management, build tooling, and release cadences.  As the project has
-progressed, however, this tight coupling has become somewhat taxing.  For example, the Data Access services
-and the Data Release Production codes have a large set of disjoint software dependencies, but shared
-packaging, CI, and release tooling result in an overlapping package dependency graph which causes developers
-in both groups to commonly build codes for which they have little need in their day-to-day work. Additionally,
-while much of the LSST software stack prioritizes platform and toolchain portability in order to foster
-individual collaborations, the return for effort invested on this is probably lower for datacenter scale
-services delivered as fully portable containers.  Lastly, as the project moves into commissioning and
-operations, it seems likely that periods of heavy activity on the data production and data service codes will
-phase and there will be a desire for decoupled release cadences for these.  In light of these concerns the
-project is currently working to decouple Data Access Services CI, toochain/platform support requirements,
-and and release cadences from the rest of the LSST software stack, while maintaining common code quality
-standards and development practices.

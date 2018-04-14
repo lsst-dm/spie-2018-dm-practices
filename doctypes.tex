@@ -3,8 +3,6 @@
 
 Data Management creates a variety of documentation for different audiences, and with different purposes.
 Broadly, we break documentation efforts into two categories: project documentation and user documentation.
-Project documentation is a tree of requirements documents, interface control documents, design documents, and test reports that aides the construction project.
-User documentation, on the other hand, is a deliverable that we ship alongside our software and services to either the scientific community or future developers and operators.
 
 \subsubsection{Project documentation}
 \label{sec:project_docs}
@@ -12,25 +10,23 @@ User documentation, on the other hand, is a deliverable that we ship alongside o
 \paragraph{Documentation tree}
 
 DM creates project documentation that fits within LSST's overall Document Management Plan.\cite{LPM-51}
-As is standard practice, we organize the collection of project documents in a tree.
+As is standard practice, we organize the collection of project documents in a tree\cite{LDM-294}.
 LSST Project Management and Systems Engineering requirements documents form the tree's trunk, along with interface control documents that DM collaborates on with other LSST subsystems.
 These flow into Data Management requirements documents for each DM product, and then from each design document, we maintain test specification documents.
 Overall, the DM Validation and Test Plan\cite{LDM-503} coordinates these test specifications.
-Finally, we write test reports that implement the test plans.
+Finally, we write test reports on the execution of the test plans.
 We have processes for managing project documents and revisions at the project level and within DM and they are described in \S\ref{sec:ccb}.
 
 \paragraph{Technical notes}
 
-We recognized that DM team members needed to write documents as a means of communication within the project.
+We recognized that DM team members need or wish  to write documents as a means of communication within the project.
 These documents might be design proposals, summaries of data processing experiments, or descriptions of a new internal tool or service.
 This content does not fit within the formal document tree, nor does it require oversight from the DM-CCB.
 Technical notes fit this niche for DM.
-
-Since the defining characteristic of technical notes is the editorial independence of their authors, we sought to automate as much of the maintenance surrounding these documents as possible.
+We seek to automate as much of the maintenance surrounding these documents as possible.
 By allowing an author to create a new document and publishing it without either seeking permission or waiting on a human coordinator, we maximize the likelihood that DM team members will choose to share information through technical notes.
 Thus we have implemented a self-service system based on ChatOps that allows any Data Management staff member to create and publish a technical note (\S\ref{sec:chatops}).
 These technical notes are edited on GitHub and published as websites, and in the future, we plan to make these documents readily citeable with DOIs and listings in archives.
-
 As a cultural benefit, we see technical notes as a way for junior members to gain exposure within the project, and beyond, by publishing a citeable article featuring their contributions.
 
 \paragraph{Developer Guide}
@@ -48,11 +44,10 @@ We use GitHub pull requests to get feedback on contributions and provide approva
 \label{sec:user_docs}
 
 User documentation describes what is built, and most importantly, how to operate it.
-Thus we consider user documentation to be a deliverable product of the LSST construction project, on par with the software itself.
-
+Thi is a deliverable of the LSST construction project, on par with the software itself.
 At the time of this publication, most DM effort towards user documentation have gone into the LSST Science Pipelines product\cite{pipelines-guide} and user guides for internal tooling.
 The LSST Science Platform\cite{LSE-319} is the second major documentation project.
-DM will also lay the groundwork for documentation of both LSST's data releases and prompt products.
+%DM will also lay the groundwork for documentation of both LSST's data releases and prompt products.
 
 We begin a new user documentation project by studying the nature of the product user needs.
 Then we work towards an information architecture plan that maps out topics in the user documentation project.

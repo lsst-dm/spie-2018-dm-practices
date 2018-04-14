@@ -1,10 +1,11 @@
 \section{Model-Based Systems Engineering}
 
 LSST uses Model-Based Systems Engineering\cite{2014SPIE.9150E..0MC}, with designs, requirements, and behavior described using the SysML language and stored within a database-backed tool, initially Enterprise Architect and now MagicDraw.
-MagicDraw permits communication between teams through a unified model of the system.
-It also allows for relatively easy maintenance of the requirements at all levels of the system as well as traceability between requirements and the system components that satisfy them.
+MagicDraw permits communication between teams through a unified model of the system and
+relatively easy maintenance of the requirements at all levels of the system including traceability between requirements and the system components that satisfy them.
 
-Within the SysML language, there are specialized diagram types.
+%% WOM - this paragrpah could go .. really
+\noindent Within the SysML language, there are specialized diagram types.
 The Requirement Diagram documents requirements and their relationships.
 Block Definition Diagrams highlighting interfaces and Internal Block Diagrams highlighting component breakdowns explicate the design of the system.
 Activity Diagrams, Sequence Diagrams, State Machine Diagrams, and Use Case Diagrams show the system's intended behavior.
@@ -36,13 +37,10 @@ The Data Management System Requirements (DMSR)\cite{LSE-61} are the flowdown to 
 At the same level as the DMSR, Interface Control Documents (ICDs) specify the relationships between the different subsystems.
 Finally, within the DM system, component requirements documents are used where appropriate to constrain designs and provide for internal verification.
 
-\subsection{Flowdown}
-
-One of the excellent features of MagicDraw is the ability to rapidly document the flowdown of requirements.
+One  excellent feature of MagicDraw is the ability to rapidly document the flowdown of requirements.
 Using a table with higher-level requirements on one side and lower-level requirements on the other, the ``refines'' relationship between the latter and the former can be created by merely toggling an arrow within appropriate table cells.
 Unfortunately, it is more difficult to use the SysML ``copy'' relationship in cases where the lower-level requirement happens to be identical to the higher-level one.
 It has been necessary to manually copy the requirement text (and generate a new requirement id, of course).
-
 Since system components are also present in the MagicDraw model, the tool also helps with recording which requirements apply to each component, and, conversely, which components are needed to satisfy each requirement.
 
 \subsection{Conclusion}

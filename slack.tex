@@ -1,38 +1,23 @@
 \subsection{Slack}
 \label{sec:slack}
 
-The data management group uses instant messaging tools to answer questions,
+The data management group uses instant messaging tools  to answer questions,
 share code snippets and errors, and coordinate activities in real-time.
 Before using instant messaging, we would communicate primarily via e-mail or
 over the phone. While these tools do still have their place, being able to have
-conversations in a team-wide application has been very helpful. Discussions
-happen with more team members participating, instead of just who happened to
-be on a phone call or an e-mail thread. Questions and concerns have been able
-to be answered much more quickly.  Site channels help coordinate discussions
-useful to local teams.  We even have non-work related channels where we can
+conversations in a team-wide application has been very helpful.
+Site channels help coordinate discussions
+useful to local teams.  We have non-work related channels where we can
 discuss various topics, which has sparked conversations about previously
 unrealized common interests. It has been beneficial to team building and
 helped foster friendships.
 
-We have used two different instant messaging tools in the last four years. The
-first tool we used was HipChat. Besides the essential features expected
-from an instant messaging client (such as discussion channels and one
-to one direct messaging), we were also able to receive Jenkins and Jira issue
-notifications, which we found very helpful.
 
 We used HipChat for two years and eventually started looking at other options
 because we found the user experience was, at times, inconsistent and
-frustrating. One of the most significant issues was how it managed unread
-messages. If the user left the application, HipChat did not maintain where the
-user was in the message chain. When the tool restarted, it required the user
-to scroll back through messages to pick up where they left off. Notifications
-were erratic, and sometimes would arrive late or not at all. Some users
-particularly liked features such as video chat, while other users found this
-feature unstable and resorted to using other video chat services such as Google
-Hangouts.
-
-After a brief testing period, we decided to transition to Slack, which we
-continue to use today. The move from HipChat to Slack was straightforward,
+frustrating especially treatment of message history.
+After a brief testing period, we transitioned to Slack.
+The move from HipChat to Slack was straightforward,
 although we did lose the discussion history from HipChat.  At first, we
 thought this would be an issue, but in practice, we rarely search history older
 than a couple of weeks.  We have had difficulties in balancing when to
@@ -42,37 +27,19 @@ distributed to more team members, since everyone may not have been in the
 channel at that time.  We continue to improve our efforts in this regard by
 starting RFC's or Confluence discussions to distribute information more widely.
 
-Slack initially didn't have video chat when we switched from HipChat, but
+\noindent Slack initially didn't have video chat when we switched from HipChat, but
 it does now.  We use this for ad-hoc calls for the channel, which has been
 easier than coordinating a call via Google Hangouts or BlueJeans.
 
-When we made the switch, we wanted to take the opportunity to normalize the
-users' chat names to match the names used on GitHub, which would have
-simplified how we notified users of software build failures.  It proved
-difficult to coordinate, so we let our Jenkins bot do the translation between
-their GitHub ID and their Slack account.
-
-Slack offers of HipChat's functionality and improves several features. Slack
-has several options on how unread messages are handled and displayed, allowing
-users to choose how the application behaves when the application restarts.
-Users can decide how to handle unread messages either showing them where the
-application was last used, or by marking them already read.
-
-Other features include direct messaging can be set up for small groups,
+Direct messaging can be set up for small groups,
 instead of creating a public chat room for an ephemeral discussion topic.
 We create temporary channels for members to communicate during workshops and
 conferences, which helps team members coordinate while on-site and to involve
 people who aren't attending.  This paper itself was even organized
 within a Slack channel, allowing us to discuss it and to get automatic
 notifications of changes to it via the GitHub Slack bot.
-
 Previews of URLs, global and per channel notification preferences and an
 API to integrate third-party or custom chat-bot apps. One of those apps,
 sqrbot, is discussed in the next section.
-
-Other subsystems within LSST which either had already been using HipChat or
-were beginning to explore instant messaging services have also transitioned to
-Slack. We expect this to be of great benefit to us as we integrate the work
-from the LSST sub-systems.
 
 \input{chatops}
