@@ -80,7 +80,8 @@ release.
 \noindent{\bf Build/publish eups binary ``tarball'' packages.}
 This is perhaps the most complex stage in a release.  Multiple builds/publishes
 are run in parallel.  As of the \texttt{15.0} (\texttt{eups} distrib tag
-\texttt{v15\_0}) release, the build matrix is: Python 2 and 3 on CentOS~6, CentOS~7, and macOS 10.9.
+\texttt{v15\_0}) release, the build matrix is: Python 3 on CentOS~6, CentOS~7, and macOS 10.12 (in 10.9 compatibility mode).
+We use the GCC\,6 compiler from \texttt{devtoolset-6} on Linux and the Apple \texttt{clang} compiler matching the macOS version.
 
 \noindent Every build is started from scratch and bootstraps a development/installation environment using the \href{https://github.com/lsst/lsst/blob/master/scripts/newinstall.sh}{\texttt{new\-install.sh}}\cite{pipelines-guide} script, just as an ``end user'' would when building/installing science pipeline software.
 
