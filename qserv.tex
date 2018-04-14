@@ -7,17 +7,15 @@ center context rather than on individual developer machines.
 
 The various components of the Data Access Services are built within LSST CI (Jenkins) as Docker containers.
 Per general LSST practice, unit tests included in each module are executed as part of the build, and the build
-will be fail if these do not pass.  In addition, some parts of the service suite have coverage by small-
-scale automated integration tests; these tests are run by Travis CI on each GitHub branch commit or pull
+will fail if these do not pass.  In addition, some parts of the service suite have coverage by small-scale automated integration tests; these tests are run by Travis CI on each GitHub branch commit or pull
 request.  The automated integration tests launch a constellation of containers configured with test datasets,
 then make a series of service requests and evaluate received responses against known/expected results.
 
 The Data Access Services are at present deployed at scale for testing and development on three compute
-clusters: one thirty node cluster at NCSA, and two twenty-five node clusters at CC-IN2P3.  These deployments
+clusters: one thirty-node cluster at NCSA, and two twenty-five node clusters at CC-IN2P3.  These deployments
 host a combination of synthetic test data and scientifically valid test data sourced from other astronomical
 surveys such as SDSS, WISE, and HSC.  Scale testing is re-provisioned annually on clusters of increasing size
 with datasets of increasing size, on a ramp toward the scale necessary to support start of operations.
 
 Cluster deployments of the Data Access Services containers are done at present with a collection of ad-hoc
 administration scripts, but the project is working currently to replace these with Kubernetes tooling.
-
