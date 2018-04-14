@@ -7,7 +7,7 @@ center context rather than on individual developer machines.
 
 The various components of the Data Access Services are built within LSST CI (Jenkins) as Docker containers.
 Per general LSST practice, unit tests included in each module are executed as part of the build, and the build
-will be failed if these do not pass.  In addition, some parts of the service suite have coverage by small-
+will be fail if these do not pass.  In addition, some parts of the service suite have coverage by small-
 scale automated integration tests; these tests are run by Travis CI on each GitHub branch commit or pull
 request.  The automated integration tests launch a constellation of containers configured with test datasets,
 then make a series of service requests and evaluate received responses against known/expected results.

@@ -33,7 +33,7 @@ In the next sections we describe the build systems for specific types of DM docu
 \label{sec:latex_tooling}
 
 We write most project documentation (add reference) with LaTeX.
-To standardize these documents, and ease maintenance, we use a lsst-texmf\cite{lsst-texmf} LaTeX package (based on LaTeX classes developed for Gaia) that provide a document class, styles, and bibliography styles.
+To standardize these documents, and ease maintenance, we use an lsst-texmf\cite{lsst-texmf} LaTeX package (based on LaTeX classes developed for Gaia) that provide a document class, styles, and bibliography styles.
 The package also contains a common list of acronyms to populate document glossaries.
 Additionally, we package common BibTeX bibliography files in the lsst-texmf repository.
 Every DM LaTeX document is expected to upstream all of its citations into these common bibliography files.
@@ -48,7 +48,7 @@ After building the document, the Travis CI job uploads the versioned document (c
 Since LaTeX documents compile to PDF, we create HTML landing pages that wrap the PDF and provide metadata to readers.\footnote{\url{https://github.com/lsst-sqre/lander}}
 
 Developing a document on GitHub is convenient for reviewing and approving change-controlled project documentation.
-When changes on the \texttt{master} branch are ready to become the baseline, we create a release branch to incorporate feedback from the change control board.
+When changes on the \texttt{master} branch are ready to become the baseline, we create a release branch to incorporate feedback from the Change Control Board.
 Once the change control board approves a document, we tag that version.
 LSST archives baselined documents, as well as intermediate drafts, in our Xerox Docushare repository.
 
@@ -65,4 +65,4 @@ We are also developing our own custom extensions, specific to LSST documentation
 These are being developed in our Documenteer Python package.
 
 For software projects, we incorporate the Sphinx site directly into the software's codebase.
-Since our EUPS-managed software stacks are composed of many Git repositories, we maintain documentation in each repository, but combine that documentation at build-time into a single documentation website.
+Since our software stacks are composed of many Git repositories, we maintain documentation in each repository, but combine that documentation at build-time into a single documentation website.

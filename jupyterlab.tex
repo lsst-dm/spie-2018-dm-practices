@@ -1,6 +1,9 @@
 \subsection{Case Study: Deploying releases to JupyterLab}
 \label{sec:jupyterlab}
 
+As our exploration of JupyterLab as the interactive notebook component
+of the LSST Science Platform\cite{LSE-319} proceeds, we have realized the need for
+automated deployments of the lab environment.
 One of the build artifacts mentioned above is a Docker container that includes the stack.
 Since the
 JupyterLab environment is Kubernetes ready, we have appended a phase to
@@ -15,10 +18,7 @@ of formats.  From this we can construct a menu of the most recent daily,
 weekly, and release builds, and present a choice of stack versions to
 the user at JupyterHub login time.
 
-As our exploration of JupyterLab as the interactive notebook component
-of the LSST Science Platform\cite{LSE-319} proceeds, we have realized the need for
-automated deployments of the lab environment, which is simply a
-Kubernetes cluster and namespace.  Automated deployment serves two
+\noindent Automated deployment serves two
 purposes: first, it makes it possible to immediately QA changes to the
 lab environment itself, since the deployment can become part of a CI
 process.  Second, it makes the process of standing up an environment for

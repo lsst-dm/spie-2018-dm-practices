@@ -7,8 +7,8 @@ If they propose an API change, they are agreeing that they will fix any breakage
 When an RFC is submitted it enters the \emph{Proposed} state and the proposal is mailed to the DM developer list and an announcement is made on the main DM Slack channel.
 For changes that are expected to have no real impact outside of a single package, a due date of 3 days is acceptable.
 For changes that might result in significant debate, for example adding a new package to be supported by DM or changing an API used by many packages, the proposer is advised to give at least a week and possibly two weeks for debate.
-Any one can comment on the RFC and when consensus is reached the RFC can be \emph{Adopted} by the proposer.
-If consensus could not be reached the proposer has the option of withdrawing the RFC completely, adding more time, or flagging the RFC to the Change Control Board for more formal decision making.
+Anyone can comment on the RFC and when consensus is reached the RFC can be \emph{Adopted} by the proposer.
+If consensus could not be reached the proposer has the option of withdrawing the RFC completely, adding more time, or flagging the RFC to the Change Control Board ( \S\ref{sec:ccb}) for more formal decision making.
 On adoption, an RFC must be associated with actual work by filing tickets in DM Jira and connecting them with an ``is triggering'' relationship.
 The DM Systems Engineer is tasked with looking at RFCs on a weekly basis to ensure that proposed RFCs are not languishing and that implemented RFCs are correctly marked as such.
 The \emph{Implemented} state is recognized by scanning all the \emph{Adopted} RFCs and seeing that all triggered work has been completed.
@@ -25,7 +25,7 @@ The LSST CCB meets regularly with formal meetings each month and weekly video ca
 The CCB process itself is mediated by a bespoke Drupal web app written early in the life of the project.
 DM  use Jira for work directly resulting from a CCB investigation, or for noting issues with project level change-controlled documentation that may need to be addressed when the person does not necessarily have a formal request prepared.
 
-Inside DM we have our own formal CCB
+Inside DM we have our own formal Configuration Control Board
 chaired by the DM Systems Engineer and with  representation from senior members of each DM team as well as the DM Project Manager and DM Subsystem Scientist.
 DM CCB uses the same RFC process as described above, but issues to be discussed by the DM CCB are immediately submitted into the \emph{Flagged} state.
 This is mainly used to discuss changes to the baseline documents and to approve test reports associated with formal milestones.
