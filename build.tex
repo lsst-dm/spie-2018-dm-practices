@@ -7,10 +7,9 @@ We use EUPS to specify the dependencies between packages and the \texttt{ups} di
 \subsubsection{Software Packaging}
 
 There are four types of software that are required to be handled in order to install the LSST DM Science Pipelines software packages.
-The first type are the system prerequisites that we need to have available on the system: this can include compilers, and build support tools such as \texttt{cmake}.
+The first type are the prerequisites that we need to have available on the system: this can include compilers, and build support tools such as \texttt{cmake}.
 The second type is Python and the set of standard Python packages.
-Theoretically the software should  build with any valid Python, but for LSST development and testing we always install our own Anaconda and
- a set of Python prerequisites including \texttt{numpy}, \texttt{matplotlib}, and \texttt{astropy}\cite{2018arXiv180102634T}.
+Theoretically the software should  build with any valid Python, but for LSST development and testing we always install our own Anaconda, including prerequisites packages \texttt{numpy}, \texttt{matplotlib}, and \texttt{astropy}\cite{2018arXiv180102634T}.
 The third type of packages are EUPS ``tar and patch'' packages of third-party code
 which  consist of a (compressed) tar file of the upstream distribution, an optional directory of patches to be applied after the source code has been extracted, and a \texttt{ups} directory containing a table file for dependency management along with a file named \texttt{eupspkg.cfg.sh} that provides instructions for overriding the default build and install behavior.
 This approach to third party packages allows us to know what patches we have applied and has the benefit of giving us direct control over a specific version that we wish to build against.
@@ -21,7 +20,7 @@ In a few cases, where the third-party software is available on GitHub and we are
 For Science Pipelines we use this technique for the AST library\cite{2016A&C....15...33B} for handling coordinate transformations.
 The LSST EUPS-based software packages themselves use a standard layout with SCons\cite{2005Scons1377085} being used to build each package.
 We have written extensions to SCons to support our use of C++ with Pybind11 wrappers, and Python code tested with pytest.
-Support packages from the Science Quality and Reliability Engineering group, use industry standard packaging systems based on the language in the package, with Python packages being distributed through PyPI and dependencies managed in the standard Python manner.
+Support packages, those that do not use EUPS, from the Science Quality and Reliability Engineering group, use industry standard packaging systems based on the language in the package, with Python packages being distributed through PyPI and dependencies managed in the standard Python manner.
 
 \subsubsection{Building from git}
 
@@ -44,6 +43,6 @@ These tags are distinct from git tags, the corresponding version of which would 
 
 \subsubsection{Future Considerations}
 
-We have considered creating a git repository similar to the current \texttt{lsst\_distrib} metapackage, containing git submodules to the separate git repositories, and this is how we implement a single git repository of all the DM documentation.
+We have considered creating a git repository similar to the current \texttt{lsst\_distrib} metapackage, containing its packages as git submodules, and this is how we implement a single git repository of all the DM documentation.
 This would have the advantage of being able to check out specific versions of all the desired packages, and whilst the updates to the metapackage could be automated, this comes at the added complication of submodules.
 We are also investigating the adoption of true semantic versioning\cite{semver} for all our modules and conversion of the packaging to standard Python packages that can be \texttt{pip}-installable (see for example the discussion in Ref.~\citenum{2016SPIE.9913E..0GJ}) but this is not yet past a proof of concept stage.

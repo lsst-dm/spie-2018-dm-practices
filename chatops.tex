@@ -1,8 +1,8 @@
-\subsubsection{Chat Ops - sqrbot}
+\subsubsection{ChatOps: SQuaRE Bot}
 \label{sec:chatops}
 %WOM Should this be title SQLBOT ? the tile does not mean much
 
-DM-SQuaRE is using a Slack chatbot called ``sqrbot'' to make some tasks
+DM-SQuaRE is using a Slack chatbot called \href{https://github.com/lsst-sqre/sqrbot}{\texttt{sqrbot}} to make some tasks
 easier. Currently it performs a range of functions, from returning the
 status of various infrastructure machines to creating technotes to
 monitoring whether metrics in our processing stack have changed between
@@ -14,15 +14,15 @@ required breaking workflow.  Either (as with technote creation) the
 requestor would have to interrupt someone else in order to get the work
 performed, or they'd have to interrupt their own workflow to, for
 instance, copy the ticket name, go to Jira, and search for the ticket.
-With sqrbot, the requestor can simply ask sqrbot in a Slack channel for
+With \texttt{sqrbot}, the requestor can simply ask \texttt{sqrbot} in a Slack channel for
 the information (or creation of a technote skeleton, etc.) and get
 immediate gratification without needing to task-switch or interrupt
 a co-worker.
 
-The basic architecture is simple: sqrbot is a collection of hubot
+The basic architecture is simple: \texttt{sqrbot} is a collection of hubot
 scripts running as a Slack bot, which in turn drive microservices,
 written in Python and implemented using the Flask framework.  These
-microservices have an API that responds with JSON, so the job of sqrbot
+microservices have an API that responds with JSON, so the job of \texttt{sqrbot}
 is simply to accept commands, create appropriate HTTP transactions, and
 then reformat the output into a conversational format.  The whole
 assembly runs in a Kubernetes cluster.

@@ -7,7 +7,7 @@ A ``major'' release includes a human edited ``changelog'', updated installation
 instructions, usage notes, and a formal data processing characterization report,
 and thus can not be completely machine automated.  However, the
 mechanical steps of tagging, building, and publishing software does share
-jenkins pipeline code with the automatically triggered \texttt{daily} and
+Jenkins pipeline code with the automatically triggered \texttt{daily} and
 \texttt{weekly} releases.
 The \texttt{daily} and \texttt{weekly} are fully automated and triggered by Jenkins on a fixed
 schedule.
@@ -16,10 +16,10 @@ schedule.
 \label{sec:releases_weekly}
 \label{sec:releases_daily}
 
-The ``weekly'' and ``nightly'' release pipelines (Fig~.\ref{fig:weekly-pipeline}) are highly similar and
-principally differ in that a ``nightly'' release does not tag git
-repositories.  The rationale being that a ``nightly'' is used both for
-developer convenience and as a ``canary'' to ensure that code changes have not
+The weekly and nightly release pipelines (Fig~.\ref{fig:weekly-pipeline}) are highly similar and
+principally differ in that a nightly release does not tag git
+repositories.  The rationale being that a nightly is used both for
+developer convenience and as a \emph{canary} to ensure that code changes have not
 broken the release workflow, but they are not a product that needs to be
 reproducible/rebuildable from source.
 Both release types share a library of common Jenkins pipeline methods and
@@ -44,15 +44,15 @@ a service that developers may access with a web-browser.
 A ``manifest'' listing the \texttt{eups} products that were part of the build,
 git repository SHA1s for those products, and build dependencies are recorded by
 \texttt{lsst\_build} at this stage in a git repository structure which the tool
-refers to as ``versiondb''.  The canonical ``versiondb'' instance for science
+refers to as \texttt{versiondb}.  The canonical ``versiondb'' instance for science
 pipeline releases is published on GitHub at
 \href{https://github.com/lsst/versiondb}{\texttt{lsst/versiondb}}.
 
 \noindent {\bf Publish eups source packages.}
 \label{sec:scipipe-deploy-src}
-\texttt{eups}\ref{sec:eups} ``source packages'' or \texttt{eupspkg} are
+\texttt{eups} (\S\ref{sec:eups}) ``source packages'', known as \texttt{eupspkg}, are
 produced from the installation tree resulting from the prior step.  Note that
-although \texttt{eupspkg} are source based, and do not contain binary objects,
+although \texttt{eupspkg} are source-based, and do not contain binary objects,
 they require a complete binary installation as input to the packaging process.
 In addition to \texttt{eupspkg}, a \texttt{eups} ``distrib tag'' is also
 published, which is used to refer to a specific set of packages at fixed
@@ -80,7 +80,8 @@ release.
 \noindent{\bf Build/publish eups binary ``tarball'' packages.}
 This is perhaps the most complex stage in a release.  Multiple builds/publishes
 are run in parallel.  As of the \texttt{15.0} (\texttt{eups} distrib tag
-\texttt{v15\_0}) release, the build matrix is: Python 2 and 3 on CentOS~6, CentOS~7, and macOS 10.9.
+\texttt{v15\_0}) release, the build matrix is: Python 3 on CentOS~6, CentOS~7, and macOS 10.12 (in 10.9 compatibility mode).
+We use the GCC\,6 compiler from \texttt{devtoolset-6} on Linux and the Apple \texttt{clang} compiler matching the macOS version.
 
 \noindent Every build is started from scratch and bootstraps a development/installation environment using the \href{https://github.com/lsst/lsst/blob/master/scripts/newinstall.sh}{\texttt{new\-install.sh}}\cite{pipelines-guide} script, just as an ``end user'' would when building/installing science pipeline software.
 
