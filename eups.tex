@@ -2,19 +2,19 @@
 
 Managing the dependencies of many separate packages all undergoing rapid change including changing APIs, is a hard problem.
 At LSST we use the Extended Unix Product System (EUPS)\cite{EUPS}.
-EUPS was initially developed for SDSS \{citation needed\} as UPS, and has evolved over time migrating from Perl to Python.
-The EUPS philosophy is to organize the hierarchy of components that are required to make a release of a complex software product.
-It does this by understanding the dependencies between packages and knowing which versions of those packages were built together.
-As products are built they are installed into a directory tree where each built product is isolated from other products and all built versions of a product are available.
-A database, currently consisting of files using a bespoke file format, knows which version of a product should be used with specific versions of other products such that a coherent environment can be presented to the user.
-When a user requests that a particular product be ``set up'', EUPS sets environment variables in the current shell for every product that is required.
-Each product can specify which environment variables are relevant (for example \texttt{LD\_LIBRARY\_PATH}, \texttt{PATH}, \texttt{PYTHONPATH}) in a ``table'' file which is also used to declare optional and required dependencies.
-For each product that is being set up, EUPS adjusts the environment and prepends or appends to any previous value as requested.
+EUPS was initially developed at FNAL and adopted by SDSS \{citation needed\} as UPS, and has evolved over time migrating from C to Perl to Python.
+The EUPS philosophy is to organize the hierarchy of components that are required to make a release of a complex software product on a particular platform (\textit{e.g.} os/x); optional and required dependencies are declared recursively using ``table'' files. 
+As products are built they are installed into a directory tree where each built product is isolated from other products and associated with the exact set of dependencies used to build it.
+All built versions of a product are available at any time, along with the correct set of dependencies stored as ``expanded'' table files.
+When a user requests that a particular product be ``set up'', EUPS sets environment variables in the current shell identifying the location of the appropriate version of every dependency.
+Each product can specify which additional environment variables are relevant (for example \texttt{LD\_LIBRARY\_PATH}, \texttt{PATH}, \texttt{PYTHONPATH}) in the table file.
+For each product that is being set up, EUPS adjusts the environment and sets, prepends, or appends to any previous value as requested.
+When a product is ``un-set up'' this procedure is reversed and the environment cleaned up.
 
 A common use case is to set up a base environment and override versions of specific packages in order to debug some regression or to develop a new feature.
-EUPS excels at this use case since it is optmized for mixing and matching collections of products that have differing dependencies and ensuring that exactly the correct set are being tested.
-One downside to such a powerful system is that for many users they do not need to be able to mix and match versions and are happy to use whatever happens to be the most recent release of the software collection.
-For these users the EUPS user interface is far too complex and opaque and is much harder to understand than setting up a Python virtual environment and installing the relevant packages.
+EUPS excels at this use case since it is optimized for mixing and matching collections of products that have differing dependencies and ensuring that exactly the correct set are being tested; for example a user may use a specific version of a high-level product, with its exact dependencies, while overriding one or more dependencies with versions checked out from \textit{e.g.} \texttt{git}.
+EUPS supports the concept of tagging a `current' version, and many users are able to simply use this version; other options are to accept a `stable' or other well-known tag.
+Unfortunately LSST has not done a good job of educating our users in best practices, and some find the EUPS user interface to be far too complex and opaque and indeed harder to understand than setting up a Python virtual environment and installing the relevant packages.
 
 The reliance on environment variables has caused some issues on modern macOS installations because of System Integrity Protection (SIP).\cite{DMTN-001}
 SIP strips \texttt{DYLD\_LIBRARY\_PATH} from any subprocesses that are launched from a protected binary.
@@ -24,5 +24,6 @@ This technique is not ideal but does allow us to continue to use macOS.
 There is a worry that Apple are deprecating \texttt{DYLD\_LIBRARY\_PATH} and for that reason we are considering the use of link farms mapping the dependencies into a single temporary directory, and using \texttt{@rpath} to locate the libraries.
 This is messy given that the file system will have to be modified every time a product is set up, and it is not clear how to remove the soft links when a product is no longer needed.
 
-In addition to managing the environment and tracking of installed packages, EUPS also supports the remote installation of source and binary packages from an EUPS server.
-To support different build systems the bundled \texttt{eupspkg} scripts provide a general system for building packages, supporting customization through a shell script that can be included with each package.
+In addition to managing the environment and tracking of installed packages, EUPS also supports cloning a set of packages from one machine to another, distributing either source or binary packages from an EUPS server.
+EUPS is agnostic about the mechanism used to clone packages, supporting an extendable set of methods (\textit{e.g.} \texttt{curl} or \texttt{scp} of tarballs).
+To support source distributions using a variety of build systems, the bundled \texttt{eupspkg} scripts provide a general system for building packages, supporting customization through a shell script that can be included with each package.
