@@ -1,8 +1,8 @@
 \subsection{EUPS}\label{sec:eups}
 
-Managing the dependencies of many separate packages all undergoing rapid change including changing APIs, is a hard problem.
+Managing the dependencies of many separate packages all undergoing rapid change, including changing APIs, is a hard problem.
 At LSST we use the Extended Unix Product System (EUPS)\cite{EUPS}.
-EUPS was initially developed at FNAL and adopted by SDSS as UPS, and has evolved over time migrating from C to Perl to Python.
+EUPS was initially developed at FNAL and adopted by SDSS as UPS. It has evolved over time migrating from C to Perl to Python.
 The EUPS philosophy is to organize the hierarchy of components that are required to make a release of a complex software product on a particular platform (e.g., macOS); optional and required dependencies are declared recursively using ``table'' files.
 As products are built they are installed into a directory tree where each built product is isolated from other products and associated with the exact set of dependencies used to build it.
 All built versions of a product are available at any time, along with the correct set of dependencies stored as ``expanded'' table files.
@@ -18,10 +18,10 @@ Unfortunately LSST has not done a good job of educating our users in best practi
 
 The reliance on environment variables has caused some issues on modern macOS installations because of System Integrity Protection (SIP).\cite{DMTN-001}
 SIP strips \texttt{DYLD\_LIBRARY\_PATH} from any subprocesses that are launched from a protected binary.
-Protected binaries include those in \texttt{/usr/bin} such that shell scripts we run have no idea where to find LSST shared libraries.
-To overcome this problem we define a special environment variable, \texttt{LSST\_LIBRARY\_PATH}, defined to include everything that would be set in \texttt{DYLD\_LIBRARY\_PATH}, that will not be stripped by SIP and can therefore be available to shell scripts and build systems.
+Protected binaries include the standard shells, so shell scripts we run have no idea where to find LSST shared libraries.
+To overcome this problem we define a special environment variable, \texttt{LSST\_LIBRARY\_PATH}, that includes everything that would be set in \texttt{DYLD\_LIBRARY\_PATH} but will not be stripped by SIP and can therefore be available to shell scripts and build systems.
 This technique is not ideal but does allow us to continue to use macOS.
-There is a worry that Apple are deprecating \texttt{DYLD\_LIBRARY\_PATH} and for that reason we are considering the use of link farms mapping the dependencies into a single temporary directory, and using \texttt{@rpath} to locate the libraries.
+There is a worry that Apple are deprecating \texttt{DYLD\_LIBRARY\_PATH}, and for that reason we are considering the use of link farms mapping the dependencies into a single temporary directory and using \texttt{@rpath} to locate the libraries.
 This is messy given that the file system will have to be modified every time a product is set up, and it is not clear how to remove the soft links when a product is no longer needed.
 
 In addition to managing the environment and tracking of installed packages, EUPS also supports cloning a set of packages from one machine to another, distributing either source or binary packages from an EUPS server.

@@ -1,48 +1,48 @@
 \subsection{Building the software}
 \label{sec:buildsw}
 
-With more than one hundred distinct git repositories, building a coherent version of the LSST Science Pipelines software is not as simple as it would be with a large single repository containing all the code.
-We use EUPS to specify the dependencies between packages and the \texttt{ups} directory contains those dependencies and a description of how the code should be accessed from other packages.
+With more than one hundred distinct git repositories, building a coherent version of the LSST Science Pipelines software is not as simple as it would be with a single large repository containing all the code.
+We use EUPS to specify the dependencies between packages; the \texttt{ups} directory within each package contains those dependencies and a description of how the code should be accessed from other packages.
 
 \subsubsection{Software Packaging}
 
 There are four types of software that are required to be handled in order to install the LSST DM Science Pipelines software packages.
-The first type are the prerequisites that we need to have available on the system: this can include compilers, and build support tools such as \texttt{cmake}.
-The second type is Python and the set of standard Python packages.
-Theoretically the software should  build with any valid Python, but for LSST development and testing we always install our own Anaconda, including prerequisites packages \texttt{numpy}, \texttt{matplotlib}, and \texttt{astropy}\cite{2018arXiv180102634T}.
+The first type are the prerequisites that we need to have available on the system: this can include compilers and build support tools such as \texttt{cmake}.
+The second type is Python and the set of standard Python packages that we require.
+Theoretically the software should  build with any valid Python, but for LSST development and testing we always install our own Anaconda, including prerequisite packages \texttt{numpy}, \texttt{matplotlib}, and \texttt{astropy}\cite{2018arXiv180102634T}.
 The third type of packages are EUPS ``tar and patch'' packages of third-party code
 which  consist of a (compressed) tar file of the upstream distribution, an optional directory of patches to be applied after the source code has been extracted, and a \texttt{ups} directory containing a table file for dependency management along with a file named \texttt{eupspkg.cfg.sh} that provides instructions for overriding the default build and install behavior.
 This approach to third party packages allows us to know what patches we have applied and has the benefit of giving us direct control over a specific version that we wish to build against.
-We also have the concept of ``stub'' packages, whose job it is to validate that a prerequisite Python package is installed and has a supported version.
+The fourth type are ``stub'' packages whose job is solely to validate that a prerequisite Python package is installed and has a supported version.
 This also allows our own packages to explicitly require these packages be available for dependency tracking.
 
 In a few cases, where the third-party software is available on GitHub and we are closely affiliated with upstream, we fork the code repository and use a branch named \texttt{lsst-dev} for local modifications such as adding EUPS support.
 For Science Pipelines we use this technique for the AST library\cite{2016A&C....15...33B} for handling coordinate transformations.
 The LSST EUPS-based software packages themselves use a standard layout with SCons\cite{2005Scons1377085} being used to build each package.
-We have written extensions to SCons to support our use of C++ with Pybind11 wrappers, and Python code tested with pytest.
-Support packages, those that do not use EUPS, from the Science Quality and Reliability Engineering group, use industry standard packaging systems based on the language in the package, with Python packages being distributed through PyPI and dependencies managed in the standard Python manner.
+We have written extensions to SCons to support our use of C++ with Pybind11 wrappers and Python code tested with pytest.
+Some support packages from the Science Quality and Reliability Engineering group do not use EUPS; instead, they use industry standard packaging systems based on the language in the package, with Python packages being distributed through PyPI and dependencies managed in the standard Python manner.
 
 \subsubsection{Building from git}
 
 With all the prerequisites installed we needed a way to retrieve all the source code from GitHub and to work out which packages should be built and in what order.
 We have implemented this by writing two support packages that use EUPS for dependency management and \texttt{eupspkg} for builds.
 The \texttt{lsstsw} package was originally written purely to support continuous integration services but is now the default choice for developers who wish to build the most up to date version of the software from source.
-There is a shell script to install the local build system by installing Python and EUPS and there is a Python program for doing a full build.
+There is a shell script to install the local build system by installing Python and EUPS, and there is a Python program for doing a full build.
 This \texttt{rebuild} program is a wrapper around the \texttt{lsst\_build} package.
 There are two key phases to doing a build.
 In the first phase all the source is cloned from GitHub and the correct git reference is checked out based on the user request (usually you list the feature branch name that you are testing).
-We have a master list in a GitHub repository that maps product name to git repository and the command can be made to refresh this list every time it runs.
+We have a master list in a GitHub repository that maps product name to git repository, and the command can be made to refresh this list every time it runs.
 Once the code has been cloned and the source repositories configured properly, the second phase is to build the code in dependency order and install it using EUPS tagged with the current build number.
 The build tag can then be used to setup the products from that specific build.
 
 \subsubsection{Building from a source distribution}
 
-Not everyone needs to be able to build the cutting edge version of the code and for those users we publish packages to an EUPS server and EUPS can download the packages associated with a public EUPS tag.
-This is usually a weekly, for example \texttt{w\_2018\_13}, or an official release, such as \texttt{v15\_0}.
+Not everyone needs to be able to build the cutting-edge version of the code. For those users we publish packages to an EUPS server and EUPS can download the packages associated with a public EUPS tag.
+This is usually a weekly release, for example \texttt{w\_2018\_13}, or an official release, such as \texttt{v15\_0}.
 These tags are distinct from git tags, the corresponding version of which would be, say, \texttt{w.2018.13} in each repository (see Fig~\ref{fig:commitlog}).
 
 \subsubsection{Future Considerations}
 
-We have considered creating a git repository similar to the current \texttt{lsst\_distrib} metapackage, containing its packages as git submodules, and this is how we implement a single git repository of all the DM documentation.
-This would have the advantage of being able to check out specific versions of all the desired packages, and whilst the updates to the metapackage could be automated, this comes at the added complication of submodules.
-We are also investigating the adoption of true semantic versioning\cite{semver} for all our modules and conversion of the packaging to standard Python packages that can be \texttt{pip}-installable (see for example the discussion in Ref.~\citenum{2016SPIE.9913E..0GJ}) but this is not yet past a proof of concept stage.
+We have considered creating a git repository similar to the current \texttt{lsst\_distrib} metapackage that would contain all of its dependencies as git submodules. This is how we implement a single git repository of all the DM documentation.
+This would have the advantage of being able to check out specific versions of all the desired packages.  Whilst the updates to the metapackage could be automated, this comes at the added complication of submodules.
+We are also investigating the (re-)adoption of true semantic versioning\cite{semver} for all our modules and conversion of the packaging to standard Python packages that can be \texttt{pip}-installable (see for example the discussion in Ref.~\citenum{2016SPIE.9913E..0GJ}), but this is not yet past a proof of concept stage.
