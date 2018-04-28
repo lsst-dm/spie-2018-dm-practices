@@ -14,8 +14,8 @@ The docs-like-code approach is also convenient for building custom tooling to au
 
 A critical component of our docs-like-code system is the documentation hosting service, which we call \textit{LSST the Docs}\cite{SQR-006}\footnote{In reference to the popular \url{https://readthedocs.org}}.
 We designed \textit{LSST the Docs} around three goals: reliable scalability, support for versioned documentation, and flexible integration with continuous delivery workflows.
-LSST documentation is statically rendered at build time, stored in the cloud (Amazon S3) and delivered via a content distribution network (Fastly).
-This architecture is arbitrarily scalable, and avoids the need to maintain servers and applications to dynamically render HTML.
+LSST documentation is statically rendered at build time, stored in the cloud (Amazon S3), and delivered via a content distribution network (Fastly).
+This architecture is arbitrarily scalable and avoids the need to maintain servers and applications to dynamically render HTML.
 The static documentation approach also lends itself to \emph{versioned} documentation.
 \textit{LSST the Docs} uses URL path prefixes to deliver documentation for different versions of the same project.
 We often deploy draft versions of documentation based on Git branches to support code reviews.
@@ -25,7 +25,7 @@ Generally all documentation projects hosted on \textit{LSST the Docs} have some 
 Our LaTeX projects and technical notes are built with Travis CI, triggered automatically by GitHub activity.
 Documentation for the larger, and more complex, LSST Stack software is built on a Jenkins CI server.
 In each case, the continuous integration pipeline uses a client to upload built documentation to \textit{LSST the Docs}.
-\textit{LSST the Docs} does not provide is own documentation build service.
+\textit{LSST the Docs} does not provide its own documentation build service.
 This is in distinct contrast to other static documentation hosting services, like Read the Docs, and allows the necessary flexibility to let software and documentation projects define their own build environments.
 In the next sections we describe the build systems for specific types of DM documentation that are deployed with \textit{LSST the Docs}.
 
@@ -33,7 +33,7 @@ In the next sections we describe the build systems for specific types of DM docu
 \label{sec:latex_tooling}
 
 We write most project documentation with LaTeX.
-To standardize these documents, and ease maintenance, we use an lsst-texmf\cite{lsst-texmf} LaTeX package (based on LaTeX classes developed for Gaia) that provide a document class, styles, and bibliography styles.
+To standardize these documents, and ease maintenance, we use an lsst-texmf\cite{lsst-texmf} LaTeX package (based on LaTeX classes developed for Gaia) that provides a document class, styles, and bibliography styles.
 The package also contains a common list of acronyms to populate document glossaries.
 Additionally, we package common BibTeX bibliography files in the lsst-texmf repository.
 Every DM LaTeX document is expected to upstream all of its citations into these common bibliography files.
@@ -49,7 +49,7 @@ Since LaTeX documents compile to PDF, we create HTML landing pages that wrap the
 
 Developing a document on GitHub is convenient for reviewing and approving change-controlled project documentation.
 When changes on the \texttt{master} branch are ready to become the baseline, we create a release branch to incorporate feedback from the Change Control Board.
-Once the change control board approves a document, we tag that version.
+Once the board approves a document, we tag that version.
 LSST archives baselined documents, as well as intermediate drafts, in our Xerox Docushare repository.
 
 \subsubsection{Sphinx-based user documentation}
