@@ -5,8 +5,7 @@
 \subsection{Jenkins}
 \label{sec:jenkins}
 
- The initial CI system used for pre-merge testing of science pipeline code in 2014  was \href{https://buildbot.net/}{Buildbot}.
-% should this be broken into a \item list? No. Not enough space.
+ The initial CI system used for pre-merge testing of science pipeline code in 2014  was \href{https://buildbot.net/}{Buildbot}, partly because it is written in Python.
 After evaluating several potential CI/CD systems as a replacement,
 \href{https://jenkins.io/}{Jenkins} was selected for numerous reasons.
 It has, e.g.,  the \href{https://plugins.jenkins.io/github-oauth}{GitHub OAuth} plugin,
@@ -17,11 +16,11 @@ CI testing to automation of a number of common tasks.  Among various sundry
 tasks, it is being used to build Docker images, update local software mirrors, and
 schedule regular backups.  Perhaps most notably, it is being used to drive a
 CD workflow for completely automated nightly and weekly
-release/publication of science pipelines codes (\ref{sec:scipipe-deploy}).
+release/publication of science pipelines codes (\S\ref{sec:scipipe-deploy}).
 
 \subsubsection{Configuration \& Deployment}
 
-The Jenkins core and various plugins need to be version managed and configured.
+The Jenkins core and various plugins need to be version-managed and configured.
 Although there is currently a major effort underway to add native
 ``\href{https://github.com/jenkinsci/configuration-as-code-plugin}{configuration by code}'' to
 the Jenkins core, this is not yet considered production ready and did not exist
@@ -32,9 +31,9 @@ management abilities among the CM tools surveyed via the \href{https://github.co
 Non-trivial improvements have been contributed by DM staff to this module\cite{puppetconf-jenkins} in order to make it more suitable for managing a Jenkins deployment.
 
 Configuration of Jenkins jobs is handled via the \href{https://plugins.jenkins.io/job-dsl}{\texttt{job-dsl}} plugin.
-This enables a \href{http://www.groovy-lang.org/}{\texttt{groovy}} based DSL and a special job type that
+This enables a \href{http://www.groovy-lang.org/}{\texttt{groovy}} based domain-specific language (DSL) and a special job type that
 will ``seed'' Jenkins jobs from a git repository that contains \texttt{job-dsl}
-script(s).  The seed job itself is maintained as XML that is manually
+script(s).  The seed job itself is maintained as XML that is
 installed by puppet.  The result is that all jobs configuration is managed via
 source code management and no manual configuration via the Jenkins UI is required to
 add/delete/change or stand up a testing environment.
@@ -51,7 +50,7 @@ add/delete/change or stand up a testing environment.
 
 In addition to Jenkins, we also use the Travis integration provided by GitHub.
 As described in \S\ref{sec:ltd} Travis is used for deployment of our documentation artifacts.
-With our non-standard build system we can not use Travis for unit testing our branches in most of our software repositories.
+With our non-standard build system we cannot use Travis for unit testing the branches in most of our software repositories.
 Instead, we use Travis for linting: we validate that important CI configuration files have the correct formatting, and we run the \texttt{flake8} and \texttt{shellcheck} tools on our code.
 These Travis checks allow us to enforce our code merging policies (\S\ref{sec:dev_workflow}) by requiring that branches are up to date before merges are allowed.
 %GitHub only enables this if a Travis job is executed.
