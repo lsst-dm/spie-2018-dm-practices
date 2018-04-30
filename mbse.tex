@@ -1,17 +1,9 @@
 \section{Model-Based Systems Engineering}
 
-LSST uses Model-Based Systems Engineering\cite{2014SPIE.9150E..0MC}, with designs, requirements, and behavior described using the SysML language and stored within a database-backed tool, initially Enterprise Architect and now MagicDraw.
+The overall LSST project uses Model-Based Systems Engineering\cite{2014SPIE.9150E..0MC}, with designs, requirements, and behavior described using the SysML language and stored within a database-backed tool, initially Enterprise Architect and now MagicDraw.
 MagicDraw permits communication between teams through a unified model of the system and
 relatively easy maintenance of the requirements at all levels of the system including traceability between requirements and the system components that satisfy them.
-
-%% WOM - this paragrpah could go .. really
-\noindent Within the SysML language, there are specialized diagram types.
-The Requirement Diagram documents requirements and their relationships.
-Block Definition Diagrams highlighting interfaces and Internal Block Diagrams highlighting component breakdowns explicate the design of the system.
-Activity Diagrams, Sequence Diagrams, State Machine Diagrams, and Use Case Diagrams show the system's intended behavior.
-The MagicDraw tool allows these behavioral diagrams to be executed in a simulation mode to verify that the behavior is complete and correct.
-All of this information is useful for the verification process.
-Test cases are developed from requirements and behavior.
+The SysML model is also useful for verification of the system; test cases can be derived from the requirements and behavior descriptions in the model.
 
 \subsection{Requirements}
 
@@ -47,4 +39,4 @@ Since system components are also present in the MagicDraw model, the tool also h
 
 Ultimately, SysML and MagicDraw have been most useful for systems engineering purposes at the LSST system level, rather than within the Data Management system itself.
 While the tool is fully capable of recording component designs in diagrammatic language, adoption has been somewhat difficult; developers tend to prefer to work directly on code.
-In its place, more limited diagrams are produced using other tools such as OmniGraffle, Gliffy (particularly with the Confluence plugin), LaTeX, Archi, and \href{http://websequencediagrams.com}{websequencediagrams.com}.
+In its place, more limited diagrams are produced using other tools such as OmniGraffle, Gliffy (particularly as a plugin for Confluence), LaTeX, Archi, and \href{http://websequencediagrams.com}{websequencediagrams.com}.

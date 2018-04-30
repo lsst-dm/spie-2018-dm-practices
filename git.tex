@@ -5,10 +5,10 @@ To enable concurrent development across all the LSST DM sites, the development t
 
 \subsubsection{Version Control}\label{sec:git}\label{sec:subversion}
 
-For DM with a distributed team working across multiple time zones we decided to  move the  source code from Subversion to Git in 2011.
+With a distributed team working across multiple time zones, we decided to  move the  source code from Subversion to Git in 2011.
 One key advantage of Git  is the ability to work locally and make detailed commits without requiring that the remote server is always running.
 It was decided that the best fit for our monolithic Subversion repository was to convert it to many individual Git repositories, as is common practice.
-Initially we used gitolite for hosting git repositories on our own servers but in late 2014 we decided that we should move all development to GitHub\cite{Document-17187}, the move was completed in 2015.
+Initially we used gitolite for hosting git repositories on our own servers but in late 2014 we decided that we should move all development to GitHub\cite{Document-17187}; the move was completed in 2015.
 DM was already a strong advocate of open development within LSST and this change made it considerably easier for the wider community to see what we were doing.
 Use of GitHub  has made it easier to leverage tools such as Travis, improved our code review abilities, and made it easier to link our pull requests to issues in other people's repositories.
 
@@ -26,19 +26,20 @@ Representing each package by an independent repository also makes it easy to for
 \begin{center}
   \includegraphics[width=0.7\textwidth]{git-history}
 \end{center}
-\caption{A subset of the commit history from an  LSST package showing how each feature branch has been rebased before merging to \texttt{master}, resulting in an empty merge commit..
+\caption{A subset of the commit history from an  LSST package showing how each feature branch has been rebased before merging to \texttt{master}, resulting in an empty merge commit.
 Note also  tags for the weekly releases and a recent release candidate.
 \label{fig:commitlog}
 }
 \end{figure}
 
 LSST software development is based on the shared repository model: work is done on branches of a single repository rather than on user forks.
-Development work is associated with a Jira ticket (\S\ref{sec:jira_ticket}) in a feature branch named after the ticket, and keeping all work in a shared repository makes it easier to link code changes to their corresponding Jira tickets.
+Development work is associated with a Jira ticket (\S\ref{sec:jira_ticket}) in a feature branch named after the ticket.
+Keeping all work in a shared repository makes it easier to link code changes to their corresponding Jira tickets.
 This in turn makes it easier to audit work in terms of Jira tickets.
-Developers must test their branch as part of the full data management system (\S\ref{sec:jenkins}) before the code is considered ready to review or merge.
-GitHub pull requests from the ticket branch to \texttt{master} are used for code review, but not to merge the code.
+Developers must test their branch as part of the integrated data management system (\S\ref{sec:jenkins}) before the code is considered ready to review or merge.
+GitHub pull requests from the ticket branch to \texttt{master} are used for code review but not to merge the code.
 Instead, feature branches are merged by first rebasing them onto the latest version of \texttt{master}, then forcing a merge without Git's fast-forward optimization (Fig.~\ref{fig:commitlog}).
-This creates an empty merge commit that serves as a marker to distinguish which commits on \texttt{master} came from which feature branch.
+This creates an empty merge commit that serves as a marker to distinguish which commits came from which feature branch.
 Rebasing ensures the Git commit history appears linear to later inspection, and that all ticketed work is present on the corresponding branch.
 If we did not rebase before merging, merge commits could include significant cleanup work that would be difficult to resolve into their original tickets.
 
@@ -51,7 +52,3 @@ In addition, the workflow was at first enforced by individual developers and the
 While it worked well most of the time, there were occasional cases where a developer would accidentally push commits directly to \texttt{master}, merge improperly, or rebase onto an out-of-date \texttt{master}.
 Therefore, we began using GitHub's branch protection feature to block both direct commits to \texttt{master} and merges of unrebased ticket branches.
 Branch protection is transparent to developers so long as they follow the workflow, so this improvement catches errors without altering the overall development process.
-
-
-%% WOM consider removing
-%\input{other-workflows}

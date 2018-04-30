@@ -6,7 +6,7 @@ of the LSST Science Platform\cite{LSE-319} proceeds, we have realized the need f
 automated deployments of the lab environment.
 One of the build artifacts mentioned above is a Docker container that includes the stack.
 Since the
-JupyterLab environment is Kubernetes ready, we have appended a phase to
+JupyterLab environment is Kubernetes-ready, we have appended a phase to
 the stack builds that starts with the Docker stack container and adds
 the JupyterLab server and other Python modules we need, as well as the
 user provisioning machinery and Lab startup scripts.  Thus, with each
@@ -18,7 +18,7 @@ of formats.  From this we can construct a menu of the most recent daily,
 weekly, and release builds, and present a choice of stack versions to
 the user at JupyterHub login time.
 
-\noindent Automated deployment serves two
+Automated deployment serves two
 purposes: first, it makes it possible to immediately QA changes to the
 lab environment itself, since the deployment can become part of a CI
 process.  Second, it makes the process of standing up an environment for

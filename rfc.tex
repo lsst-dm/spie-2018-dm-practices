@@ -1,21 +1,26 @@
 \section{Decision Making Process}
-In 2014 we decided to change our approach to decision making especially for API, code style or build  environment etc. related questions.
-DM developers are familiar with Jira and we developed a Jira workflow for ``Request for Comments'' (RFCs).
-RFCs were designed to empower individual developers to propose decisions.
-Emphasis is placed on the developer being responsible for any fall out from a change.
+In 2014, anticipating the growth of the DM team with the start of construction, we adopted a new decision-making and change management process.
+Its goals were twofold: first, empower developers to make small, innocuous changes without any formal approval other than peer code review, as long as they are willing to be responsible for any fallout, and second, enable developers to easily propose larger changes, gaining approval rapidly when there are no objections.
+This has been particularly useful for changes related to APIs, code style, and the build environment.
+
+\subsection{RFC Process}
+\label{sec:rfc}
+A larger change is proposed through a ``Request for Comments'' (RFC) that is managed through a Jira workflow since DM developers are familiar with the tool.
+By default, the proposer of an RFC is expected to be responsible for handling any effects of the change.
 If they propose an API change, they are agreeing that they will fix any breakage in other DM code; if they are proposing a change to the style guide they will make the change to the style guide.
-When an RFC is submitted it enters the \emph{Proposed} state and the proposal is mailed to the DM developer list and an announcement is made on the main DM Slack channel.
+When an RFC is submitted it enters the \emph{Proposed} state, the proposal is mailed to the DM developer list, and an announcement is made on the main DM Slack channel.
+Each RFC has a defined due date by which a decision is to be made.
 For changes that are expected to have no real impact outside of a single package, a due date of 3 days is acceptable.
 For changes that might result in significant debate, for example adding a new package to be supported by DM or changing an API used by many packages, the proposer is advised to give at least a week and possibly two weeks for debate.
-Anyone can comment on the RFC and when consensus is reached the RFC can be \emph{Adopted} by the proposer.
-If consensus could not be reached the proposer has the option of withdrawing the RFC completely, adding more time, or flagging the RFC to the Change Control Board ( \S\ref{sec:ccb}) for more formal decision making.
+Anyone can comment on the RFC, and when consensus is reached the RFC can be \emph{Adopted} by the proposer.
+If consensus could not be reached the proposer has the option of withdrawing the RFC completely, adding more time, or flagging the RFC to the Change Control Board (\S\ref{sec:ccb}) for more formal decision making.
 On adoption, an RFC must be associated with actual work by filing tickets in DM Jira and connecting them with an ``is triggering'' relationship.
 The DM Systems Engineer is tasked with looking at RFCs on a weekly basis to ensure that proposed RFCs are not languishing and that implemented RFCs are correctly marked as such.
 The \emph{Implemented} state is recognized by scanning all the \emph{Adopted} RFCs and seeing that all triggered work has been completed.
 
 The RFC process has been extremely successful with 467 RFCs filed since 2014, with 321 implemented, 51 withdrawn, 5 flagged, and 90 adopted with work pending.
-We have found that some RFCs are filed asking for changes that the proposer feels are a good change to make but which they themselves are not going to be responsible for implementing.
-These are sometimes a very good idea but since there is no lead implementer, RFCs like this depend on T/CAMs picking up the work and scheduling it as part of their normal planning process.
+We have found that some RFCs are filed asking for changes that the proposer feels are desirable but which they themselves are not going to be responsible for implementing.
+These are sometimes a very good idea, but, since there is no lead implementer, RFCs like this depend on T/CAMs picking up the work and scheduling it as part of their normal planning process.
 
 \subsection{Change Control Board}
 \label{sec:ccb}
@@ -23,11 +28,11 @@ These are sometimes a very good idea but since there is no lead implementer, RFC
 The LSST has a project level Change Control Board (CCB) for managing evolution of budgets, requirements and subsystem interfaces.
 The LSST CCB meets regularly with formal meetings each month and weekly video calls.
 The CCB process itself is mediated by a bespoke Drupal web app written early in the life of the project.
-DM  use Jira for work directly resulting from a CCB investigation, or for noting issues with project level change-controlled documentation that may need to be addressed when the person does not necessarily have a formal request prepared.
+DM  use Jira for work directly resulting from a CCB investigation or for noting issues with project level change-controlled documentation that may need to be addressed when the person does not necessarily have a formal request prepared.
 
-Inside DM we have our own formal Configuration Control Board
-chaired by the DM Systems Engineer and with  representation from senior members of each DM team as well as the DM Project Manager and DM Subsystem Scientist.
+Inside DM we have our own formal DM Change Control Board
+chaired by the DM Systems Engineer and composed of the DM engineering and science leadership, including the Project Manager and Subsystem Scientist.
 DM CCB uses the same RFC process as described above, but issues to be discussed by the DM CCB are immediately submitted into the \emph{Flagged} state.
 This is mainly used to discuss changes to the baseline documents and to approve test reports associated with formal milestones.
 It is also used to give formal DM approval to changes that DM would like to be made in project level documentation.
-When deemed necessary some RFCs may require a video conference meeting to allow more direct discussion.
+When deemed necessary some RFCs may require a video conference meeting of the DM CCB to allow more direct discussion.

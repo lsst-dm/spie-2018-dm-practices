@@ -1,7 +1,7 @@
 \subsection{Code Quality}
 
 LSST DM is responsible for writing and supporting a large code base.
-In April 2018, the Qserv database software\cite{2011Wang:2011:QDS:2063348.2063364} is about 100,000 lines of C++, Firefly has about the same amount of JavaScript\cite{2016SPIE.9913E..0YR}, and the Science Pipelines software\cite{2018PASJ...70S...5B} is approximately 290,000 lines of Python and 225,000 lines of C++.\footnote{Line counts include comments but not blank lines. Python interfaces are implemented using \texttt{pybind11} and that is counted as C++ code. Science pipelines software is defined as the \texttt{lsst\_distrib} metapackage and does not include code from third party packages.}
+As of April 2018, the Qserv database software\cite{2011Wang:2011:QDS:2063348.2063364} is about 100,000 lines of C++, Firefly has about the same amount of JavaScript\cite{2016SPIE.9913E..0YR}, and the Science Pipelines software\cite{2018PASJ...70S...5B} is approximately 290,000 lines of Python and 225,000 lines of C++.\footnote{Line counts include comments but not blank lines. Python interfaces are implemented using \texttt{pybind11} and that is counted as C++ code. Science pipelines software is defined as the \texttt{lsst\_distrib} metapackage and does not include code from third party packages.}
 
 % starlink_ast is exempted. Calculation was done on cleaned directories
 % on 2018-04-02.
@@ -14,31 +14,32 @@ In April 2018, the Qserv database software\cite{2011Wang:2011:QDS:2063348.206336
 % C++                             859          21507          29472         108609
 % C/C++ Header                    555          14937          46781          42296
 
-\noindent Code quality is hard to define and notoriously difficult to tackle when hundreds of thousands of lines of code are to be supported.
-In DM we have a
-   coding standard\cite{devguide} enforced with tooling where possible. We ensure  that warnings from static analyzers are dealt with and where possible have the build fail e.g., if a \texttt{flake8} warning is issued;
-Enforce a specific C++ standard (C++14) by configuring the C++ compiler to fail if it is violated;
-Run unit tests for every commit, and generate code coverage and test statistics;
-Issue verbose warnings, including Python's \texttt{DeprecationWarning}, to warn us of any possible future issues;
-Run regular integration tests and tracking the algorithmic results to ensure that we are improving with time.
+Code quality is hard to define and notoriously difficult to tackle when hundreds of thousands of lines of code are to be supported.
+In DM we have a coding standard\cite{devguide} enforced with tooling where possible.
+We ensure  that warnings from static analyzers are dealt with and where possible have the build fail e.g., if a \texttt{flake8} warning is issued;
+enforce a specific C++ standard (C++14) by configuring the C++ compiler to fail if it is violated;
+run unit tests for every commit, which also generates code coverage and test statistics;
+issue verbose warnings, including Python's \texttt{DeprecationWarning}, to warn us of any possible future issues;
+and run regular integration tests while tracking metrics of their data products and performance to ensure that we are improving with time.
 
 \subsubsection{Coding Standards}
 \label{sec:coding-standards}
 
 Over the years, the DM team have defined extensive coding standards\cite{devguide} covering C++ and Python.
 This includes variable naming conventions, indenting policies and also how to document code.
-We use \texttt{numpydoc}\cite{numpydoc} for Python, Doxygen\cite{doxygen} for C++, and JSDoc\cite{jsdoc} for JavaScript and we automate API documentation generation.
+We use \texttt{numpydoc}\cite{numpydoc} for Python, Doxygen\cite{doxygen} for C++, and JSDoc\cite{jsdoc} for JavaScript, and we automate API documentation generation.
 
-In 2017 we significantly simplified our standard by defining it relative to the PEP\,8 standard\cite{pep8}.
+In 2017 we significantly simplified our Python standard by defining it relative to the PEP\,8 standard\cite{pep8}.
 We could not fully adopt PEP\,8 since we had to balance the benefits of automated code linting versus the cost of changing tens of thousands of lines of code.
-In particular, the variable and method naming standard is to use camel case everywhere, and it was felt to be too disruptive to change all the code, especially since to minimize confusion we would have to also modify the C++ code that is called from Python.
-There are two other areas where we are not compliant with PEP8.
+In particular, the variable and method naming standard had been to use camel case everywhere, and it was felt to be too disruptive to change all the code, especially since to minimize confusion we would have to also modify the C++ code that is called from Python.
+There are two other areas where we are not compliant with PEP\,8.
 Firstly, we disagree with the whitespace rules concerning binary operators and therefore disable this test.
 Secondly, we feel that an 80 character line limit is too short and we continue to use a 110 character limit for code.
-We did experiment with switching to 80 characters for one package, but did not like the result.
-For documentation and comments we  adopted the 75  character limit of {\emph numpydoc}, PEP\,8 does specify they should be different to code lines, but at this time there is no tooling in place to warn of non-compliance.
+We did experiment with switching to 80 characters for one package but did not like the result.
+For documentation and comments we  adopted the 75  character limit of {\emph numpydoc}.
+PEP\,8 does specify their line lengths should be different than for code, but at this time there is no tooling in place to warn of non-compliance.
 We have written and submitted a patch to the \texttt{pycodestyle} tool to implement a check for this, which has yet to be  accepted.
-The \texttt{flake8} tool is used to validate code compliance and we are happy with the results.
+The \texttt{flake8} tool is used to validate code compliance, and we are happy with the results.
 Code reviews no longer waste time worrying about whether a space should be in a particular place and can now focus on the code functionality.
 
 Based on the positive  \texttt{flake8} experience on the Python code base, we investigated options for C++.
@@ -46,8 +47,8 @@ Our code layout and formatting rules were updated to be based on the Google C++ 
 This allowed us to easily enforce these rules using the \texttt{clang-format}\cite{clangformat} tool with minimal additional configuration.
 We are currently updating the C++ code incrementally as new changes are made, and we hope to soon be able to run \texttt{clang-format} as part of an automated check when pull requests are created on GitHub.
 
-We are also investigating C++ linting with \texttt{clang-tidy}\cite{clangtidy}. Although higher runtime and configuration cost at this time make it unlikely to be used for automatic linting at pull-request-time, it is still a valuable tool in our workflow.
-Because it is based on the Clang C++ compiler \texttt{clang-tidy} has access to all the requisite information needed to find common causes for bugs using static analysis, identify things that are hard to find by eye (such as which \texttt{0} represents a pointer value to be replaced by \texttt{nullptr} and which member function overrides a virtual function from a base class to be marked with \texttt{override}), and automatically update a whole codebase to use features from modern C++.
+We are also investigating C++ linting with \texttt{clang-tidy}\cite{clangtidy}. Although higher runtime and configuration cost at this time make it unlikely to be used for automatic linting at pull-request time, it is still a valuable tool in our workflow.
+Because it is based on the Clang C++ compiler \texttt{clang-tidy} has access to all the requisite information needed to find common causes for bugs using static analysis, identify things that are hard to find by eye (such as whether \texttt{0} represents a pointer value to be replaced by \texttt{nullptr} and whether a member function overrides a virtual function from a base class and should be marked with \texttt{override}), and automatically update a whole codebase to use features from modern C++.
 % One valuable check for \texttt{clang-tidy} to perform at pull-request-time might be enforcing identifier (for example, classes, functions and variables) naming rules.
 
 \subsubsection{Language Standards}
@@ -58,28 +59,28 @@ There is still code that uses C++11 and older style but we are slowly updating t
 We are monitoring the support of the C++17 standard in common compilers.
 
 %The DM Python code was begun in the era of Python 2.3, and was targeting Python 2.7 by 2016.
-\noindent Given the commissioning timeline for LSST and the support schedule for Python 2.7,
-it is clear that Python 3 should be the target. We completed the migration to support both Python 3 and 2.7 during 2017\cite{2016arXiv161100751J}.
+Given the commissioning timeline for LSST and the support schedule for Python 2.7,
+it is clear that Python 3 should be our ultimate target. We completed the migration to support both Python 3 and 2.7 during 2017\cite{2016arXiv161100751J}.
 In April 2018 we dropped support for Python 2 and have now standardized on Python 3.6\cite{2017arXiv171200461J}.
-This will allow us to use Python 3 features for the first time.
+This will allow us to use all Python 3 features for the first time.
 
 \subsubsection{Unit Testing}
 
 Unit testing is critically important when writing code.
 In DM we do almost all our testing from Python using the \texttt{unittest} module and we test the C++ code by using the Python bindings.
-Tests are run using \texttt{pytest}\cite{pytest} and this provides some useful features via plugins.
+Tests are run using \texttt{pytest}\cite{pytest}, including several useful features provided via plugins.
 We run the tests in a multi-process mode, based on the number of cores on the system, and all code is tested with \texttt{flake8} for compliance.
-The output from the tests, including failure information, test count, and execution time, are written in JUnit XML format and is parsed by the Jenkins system to provide a test report to the relevant developer.
+The output from the tests, including failure information, test count, and execution time, are written in JUnit XML format.  This output is parsed by the Jenkins system to provide a test report to the relevant developer.
 We are also investigating the code coverage plugin and intend to record metrics of code coverage and test execution time as a function of time for long term trending analysis.
 Tests are run with full Python warnings enabled, including \texttt{DeprecationWarning}, and we expect these warnings to be fixed.
-Newer versions of \texttt{numpy} began warning when \texttt{NaN}s are used in numerical calculations and we have had to disable those warnings on a case-by-case basis once we understand that \texttt{NaN} is a reasonable value for that particular code path; we decided not to globally disable all the numeric warnings.
+Newer versions of \texttt{numpy} began warning when \texttt{NaN}s are used in numerical calculations. We have had to disable those warnings on a case-by-case basis once we confirm that \texttt{NaN} is a reasonable value for that particular code path; we decided not to globally disable all the numeric warnings.
 
 \subsubsection{Algorithmic Performance Tracking}
 
 At its most basic, the LSST DM team has to deliver algorithms that can calculate results for photometry and astrometry with sufficient accuracy to meet the overall science requirements of the LSST\cite{LPM-17}.
-Additionally, we have fixed timing and computational performance requirements and our algorithms must fit within the expected compute resources.
+Additionally, we have fixed timing and computational performance requirements, and our algorithms must fit within the expected compute resources.
 It is important for us to know quickly if an algorithm suddenly gets worse during code development.
 We have developed a set of Key Performance Metrics that we calculate on a weekly basis using precursor data from instruments on CFHT and Subaru.
-These metrics are logged with the SQuaSH system\cite{SQR-009} to enable scientists to examine trends and look for anomalies, and to allow developers to test their development branches to ensure that there aren't unexpected regressions in algorithmic performance.
-We have found that tracking metrics is not quite enough because of complex interplay between datasets and algorithms.
-Care must be taken to evaluate the metrics with knowledge of the context.
+These metrics are logged with the SQuaSH system\cite{SQR-009} to enable scientists to examine trends and look for anomalies and to allow developers to test their development branches to ensure that there aren't unexpected regressions in algorithmic performance.
+We have found that tracking metrics is not quite enough because of the complex interplay between datasets and algorithms.
+Care must be taken to evaluate the metrics with knowledge of the context, rather than relying on simple thresholds.
