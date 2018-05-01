@@ -45,12 +45,11 @@ add/delete/change or stand up a testing environment.
 
 
 
-\subsection{Travis-CI}
+\subsection{Travis CI}
 \label{sec:travis-ci}
 
-In addition to Jenkins, we also use the Travis integration provided by GitHub.
+We use Jenkins to deal with our non-standard build system and unit testing of development branches, but the close integration of Travis CI with GitHub gives us the opportunity of running additional lightweight testing and deployment.
 As described in \S\ref{sec:ltd} Travis is used for deployment of our documentation artifacts.
-With our non-standard build system we cannot use Travis for unit testing the branches in most of our software repositories.
-Instead, we use Travis for linting: we validate that important CI configuration files have the correct formatting, and we run the \texttt{flake8} and \texttt{shellcheck} tools on our code.
+We also use Travis CI for linting: we validate that important CI configuration files have the correct formatting, and we run the \texttt{flake8} and \texttt{shellcheck} tools on our code.
 These Travis checks allow us to enforce our code merging policies (\S\ref{sec:dev_workflow}) by requiring that branches are up to date before merges are allowed.
 %GitHub only enables this if a Travis job is executed.
