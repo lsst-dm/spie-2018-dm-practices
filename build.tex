@@ -9,7 +9,7 @@ We use EUPS to specify the dependencies between packages; the \texttt{ups} direc
 There are four types of software that are required to be handled in order to install the LSST DM Science Pipelines software packages.
 The first type are the prerequisites that we need to have available on the system: this can include compilers and build support tools such as \texttt{cmake}.
 The second type is Python and the set of standard Python packages that we require.
-Theoretically the software should  build with any valid Python, but for LSST development and testing we always install our own Anaconda, including prerequisite packages \texttt{numpy}, \texttt{matplotlib}, and \texttt{astropy}\cite{2018arXiv180102634T}.
+Theoretically the software should  build with any valid Python, but for LSST development and testing we always install our own Anaconda, including prerequisite packages \texttt{numpy},\cite{numpy} \texttt{matplotlib},\cite{doi:10.1109/MCSE.2007.55} and \texttt{astropy}\cite{2018arXiv180102634T}.
 The third type of packages are EUPS ``tar and patch'' packages of third-party code
 which  consist of a (compressed) tar file of the upstream distribution, an optional directory of patches to be applied after the source code has been extracted, and a \texttt{ups} directory containing a table file for dependency management along with a file named \texttt{eupspkg.cfg.sh} that provides instructions for overriding the default build and install behavior.
 This approach to third party packages allows us to know what patches we have applied and has the benefit of giving us direct control over a specific version that we wish to build against.
