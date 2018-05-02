@@ -36,11 +36,11 @@ There are two other areas where we are not compliant with PEP\,8.
 Firstly, we disagree with the whitespace rules concerning binary operators and therefore disable this test.
 Secondly, we feel that an 80 character line limit is too short and we continue to use a 110 character limit for code.
 We did experiment with switching to 80 characters for one package but did not like the result.
-For documentation and comments we  adopted the 75  character limit of {\emph numpydoc}.
+For documentation and comments we  adopted the 75  character limit of Numpydoc.\cite{numpydoc}
 PEP\,8 does specify their line lengths should be different than for code, but at this time there is no tooling in place to warn of non-compliance.
 We have written and submitted a patch to the \texttt{pycodestyle} tool to implement a check for this, which has yet to be  accepted.
 The \texttt{flake8} tool is used to validate code compliance, and we are happy with the results.
-Code reviews no longer waste time worrying about whether a space should be in a particular place and can now focus on the code functionality.
+Once implemented, code reviews no longer waste time worrying about whether a space should be in a particular place and can now focus on the code functionality.
 
 Based on the positive  \texttt{flake8} experience on the Python code base, we investigated options for C++.
 Our code layout and formatting rules were updated to be based on the Google C++ Style Guide\cite{googlestyle} with a few minor modifications, such as 4 space indentation and a 110 character line limit to maintain consistency with our Python coding standards.
