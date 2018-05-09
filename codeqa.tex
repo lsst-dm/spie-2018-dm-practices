@@ -36,17 +36,16 @@ There are two other areas where we are not compliant with PEP\,8.
 Firstly, we disagree with the whitespace rules concerning binary operators and therefore disable this test.
 Secondly, we feel that an 80 character line limit is too short and we continue to use a 110 character limit for code.
 We did experiment with switching to 80 characters for one package but did not like the result.
-For documentation and comments we  adopted the 75  character limit of {\emph numpydoc}.
+For documentation and comments we  adopted the 75  character limit of Numpydoc.\cite{numpydoc}
 PEP\,8 does specify their line lengths should be different than for code, but at this time there is no tooling in place to warn of non-compliance.
 We have written and submitted a patch to the \texttt{pycodestyle} tool to implement a check for this, which has yet to be  accepted.
 The \texttt{flake8} tool is used to validate code compliance, and we are happy with the results.
-Code reviews no longer waste time worrying about whether a space should be in a particular place and can now focus on the code functionality.
+Once implemented, code reviews no longer waste time worrying about whether a space should be in a particular place and can now focus on the code functionality.
 
 Based on the positive  \texttt{flake8} experience on the Python code base, we investigated options for C++.
 Our code layout and formatting rules were updated to be based on the Google C++ Style Guide\cite{googlestyle} with a few minor modifications, such as 4 space indentation and a 110 character line limit to maintain consistency with our Python coding standards.
 This allowed us to easily enforce these rules using the \texttt{clang-format}\cite{clangformat} tool with minimal additional configuration.
 We are currently updating the C++ code incrementally as new changes are made, and we hope to soon be able to run \texttt{clang-format} as part of an automated check when pull requests are created on GitHub.
-
 We are also investigating C++ linting with \texttt{clang-tidy}\cite{clangtidy}. Although higher runtime and configuration cost at this time make it unlikely to be used for automatic linting at pull-request time, it is still a valuable tool in our workflow.
 Because it is based on the Clang C++ compiler \texttt{clang-tidy} has access to all the requisite information needed to find common causes for bugs using static analysis, identify things that are hard to find by eye (such as whether \texttt{0} represents a pointer value to be replaced by \texttt{nullptr} and whether a member function overrides a virtual function from a base class and should be marked with \texttt{override}), and automatically update a whole codebase to use features from modern C++.
 % One valuable check for \texttt{clang-tidy} to perform at pull-request-time might be enforcing identifier (for example, classes, functions and variables) naming rules.
@@ -84,3 +83,4 @@ We have developed a set of Key Performance Metrics that we calculate on a weekly
 These metrics are logged with the SQuaSH system\cite{SQR-009} to enable scientists to examine trends and look for anomalies and to allow developers to test their development branches to ensure that there aren't unexpected regressions in algorithmic performance.
 We have found that tracking metrics is not quite enough because of the complex interplay between datasets and algorithms.
 Care must be taken to evaluate the metrics with knowledge of the context, rather than relying on simple thresholds.
+When unexpected changes in metrics are discovered, domain experts and DM scientists work together to understand why the change occurred.

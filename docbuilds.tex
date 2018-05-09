@@ -58,7 +58,7 @@ LSST archives baselined documents, as well as intermediate drafts, in our Xerox 
 For user guides, such as DM's Developer Guide and the LSST Science Pipelines documentation, we use Sphinx to generate static websites that we deploy to \textit{LSST the Docs}.
 Sphinx is ideal because it integrates well with our Python codebase.
 %%WOM consider reomving this line
-For example, docstrings within our Python code are written in the Numpydoc\cite{numpydoc} format, which is incorporated in our codebase with the Numpydoc toolchain that is wrapped with extensions from the Astropy\cite{2018arXiv180102634T} project.
+For example, docstrings within our Python code are being converted to use the Numpydoc\cite{numpydoc} format, which is incorporated in our codebase with the Numpydoc toolchain that is wrapped with extensions from the Astropy\cite{2018arXiv180102634T} project.
 Beyond Numpydoc we take further advantage of extensions developed by Sphinx's open source community.
 For example, the breathe extension pulls data about our C++ APIs from Doxygen, allowing us to generate C++ API references with Sphinx.
 We are also developing our own custom extensions, specific to LSST documentation.

@@ -19,12 +19,13 @@ We have processes for managing project documents and revisions at the project le
 \noindent \textbf{Technical notes.}
 We recognized that DM team members need or wish  to write documents as a means of communication within the project.
 These documents might be design proposals, summaries of data processing experiments, or descriptions of a new internal tool or service.
-This content does not fit within the formal document tree, nor does it require oversight from the DM-CCB.
+This content does not fit within the formal document tree, nor does it require oversight from the DM CCB (\S\ref{sec:ccb}).
 Technical notes fill this niche for DM.
 We seek to automate as much of the maintenance surrounding these documents as possible.
-By allowing an author to create a new document and publish it without either seeking permission or waiting on a human coordinator, we maximize the likelihood that DM team members will choose to share information through technical notes.
-Thus we have implemented a self-service system based on ChatOps that allows any Data Management staff member to create and publish a technical note (\S\ref{sec:chatops}).
+By allowing an author to create a new document and publish it without formal approval from management or waiting on a human coordinator, we maximize the likelihood that DM team members will choose to share information through technical notes.
+To minimize the barrier to entry we have implemented a self-service system based on ChatOps that allows any Data Management staff member to create and publish a technical note (\S\ref{sec:chatops}).
 These technical notes are edited on GitHub and published as websites, and, in the future, we plan to make these documents readily citeable with DOIs and listings in archives.
+Most technical notes are written as part of the standard development process and are reviewed in the same manner as code.
 As a cultural benefit, we see technical notes as a way for junior members to gain exposure within the project, and beyond, by publishing a citeable article featuring their contributions.
 
 \noindent \textbf{Developer Guide.}
@@ -40,7 +41,7 @@ We use GitHub pull requests to get feedback on contributions and provide approva
 \subsubsection{User documentation}
 \label{sec:user_docs}
 
-User documentation describes what is built, and most importantly, how to operate it.
+User documentation describes what is built, what has changed, and most importantly, how to operate it.
 This is a deliverable of the LSST construction project, on par with the software itself.
 At the time of this publication, most DM effort towards user documentation has gone into the LSST Science Pipelines product\cite{pipelines-guide} and user guides for internal tooling.
 The LSST Science Platform\cite{LSE-319} is the second major documentation project.
