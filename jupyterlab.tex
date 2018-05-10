@@ -28,8 +28,8 @@ back end, AWS Route 53 as the DNS provider, and either Github or CILogon
 as the OAuth2 provider.  We will add more options as demand warrants.
 The deployment tool provides a sequencer around \texttt{gcloud}, \texttt{kubectl}, and
 \texttt{awscli}.  It is driven from a YAML file, from environment variables, or
-from the command line.  The way the current version works is to
-substitute templated values from its configuration, and then run \texttt{gcloud}
+from the command line.
+The current version substitutes templated values from its configuration, and then runs \texttt{gcloud}
 and \texttt{kubectl} to create the various components of the lab installation.
 Future improvements may include a move to Helm charts rather than raw
 Kubernetes YAML, a rewrite so that deployment becomes a Terraform

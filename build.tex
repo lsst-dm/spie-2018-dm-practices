@@ -5,6 +5,7 @@ With more than one hundred distinct git repositories, building a coherent versio
 We use EUPS to specify the dependencies between packages; the \texttt{ups} directory within each package contains those dependencies and a description of how the code should be accessed from other packages.
 
 \subsubsection{Software Packaging}
+\label{sec:sw-packaging}
 
 There are four types of software that are required to be handled in order to install the LSST DM Science Pipelines software packages.
 The first type are the prerequisites that we need to have available on the system: this can include compilers and build support tools such as \texttt{cmake}.
@@ -25,14 +26,14 @@ Some support packages from the Science Quality and Reliability Engineering group
 \subsubsection{Building from git}
 
 With all the prerequisites installed we needed a way to retrieve all the source code from GitHub and to work out which packages should be built and in what order.
-We have implemented this by writing two support packages that use EUPS for dependency management and \texttt{eupspkg} for builds.
+We have implemented this by writing support packages that use EUPS for dependency management and \texttt{eupspkg} for builds.
 The \texttt{lsstsw} package was originally written purely to support continuous integration services but is now the default choice for developers who wish to build the most up to date version of the software from source.
-There is a shell script to install the local build system by installing Python and EUPS, and there is a Python program for doing a full build.
-This \texttt{rebuild} program is a wrapper around the \texttt{lsst\_build} package.
+There is a shell script to install the local build system by installing Python and EUPS, and there is a Python program, \texttt{rebuild}, for doing a full build.
+This \texttt{rebuild} program within \texttt{lsstsw} is a wrapper around the \texttt{lsst\_build} package.
 There are two key phases to doing a build.
 In the first phase all the source is cloned from GitHub and the correct git reference is checked out based on the user request (usually you list the feature branch name that you are testing).
 We have a master list in a GitHub repository that maps product name to git repository, and the command can be made to refresh this list every time it runs.
-Once the code has been cloned and the source repositories configured properly, the second phase is to build the code in dependency order and install it using EUPS tagged with the current build number.
+Once the code has been cloned and the source repositories configured properly, the second phase is to build the code in dependency order and install it using EUPS tagged with a unique build number.
 The build tag can then be used to setup the products from that specific build.
 
 \subsubsection{Building from a source distribution}
